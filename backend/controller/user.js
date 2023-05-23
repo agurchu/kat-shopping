@@ -13,7 +13,7 @@ const { isAuthenticated, isAdmin } = require("../middleware/auth");
 
 router.post("/create-user", upload.single("file"), async (req, res, next) => {
   try {
-    const { name, email, password } = req.body;
+    const { fullName, email, password } = req.body;
     const userEmail = await User.findOne({ email });
 
     if (userEmail) {
@@ -31,35 +31,41 @@ router.post("/create-user", upload.single("file"), async (req, res, next) => {
     const fileUrl = path.join(filename);
 
     const user = {
-      name: name,
+      fullName: fullName,
       email: email,
       password: password,
       avatar: fileUrl,
     };
 
-    const activationToken = createActivationToken(user);
+    const newUser = await User.create(user);
+    res.status(201).json({
+      success: true,
+      newUser,
+    });
 
-    const activationUrl = `https://eshop-tutorial-cefl.vercel.app/activation/${activationToken}`;
+    // const activationToken = createActivationToken(user);
 
-    try {
-      await sendMail({
-        email: user.email,
-        subject: "Activate your account",
-        message: `Hello ${user.name}, please click on the link to activate your account: ${activationUrl}`,
-      });
-      res.status(201).json({
-        success: true,
-        message: `please check your email:- ${user.email} to activate your account!`,
-      });
-    } catch (error) {
-      return next(new ErrorHandler(error.message, 500));
-    }
+    // const activationUrl = `https://eshop-tutorial-cefl.vercel.app/activation/${activationToken}`;
+
+    // try {
+    //   // await sendMail({
+    //   //   email: user.email,
+    //   //   subject: "Activate your account",
+    //   //   message: `Hello ${user.name}, please click on the link to activate your account: ${activationUrl}`,
+    //   // });
+    //   // res.status(201).json({
+    //   //   success: true,
+    //   //   message: `please check your email:- ${user.email} to activate your account!`,
+    //   // });
+    // } catch (error) {
+    //   return next(new ErrorHandler(error.message, 500));
+    // }
   } catch (error) {
     return next(new ErrorHandler(error.message, 400));
   }
 });
 
-// // create activation token
+// create activation token
 // const createActivationToken = (user) => {
 //   return jwt.sign(user, process.env.ACTIVATION_SECRET, {
 //     expiresIn: "5m",
