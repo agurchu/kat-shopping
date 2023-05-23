@@ -37,40 +37,34 @@ router.post("/create-user", upload.single("file"), async (req, res, next) => {
       avatar: fileUrl,
     };
 
-    const newUser = await User.create(user);
-    res.status(201).json({
-      success: true,
-      newUser,
-    });
+    const activationToken = createActivationToken(user);
 
-    // const activationToken = createActivationToken(user);
+    const activationUrl = `https://eshop-tutorial-cefl.vercel.app/activation/${activationToken}`;
 
-    // const activationUrl = `https://eshop-tutorial-cefl.vercel.app/activation/${activationToken}`;
-
-    // try {
-    //   // await sendMail({
-    //   //   email: user.email,
-    //   //   subject: "Activate your account",
-    //   //   message: `Hello ${user.name}, please click on the link to activate your account: ${activationUrl}`,
-    //   // });
-    //   // res.status(201).json({
-    //   //   success: true,
-    //   //   message: `please check your email:- ${user.email} to activate your account!`,
-    //   // });
-    // } catch (error) {
-    //   return next(new ErrorHandler(error.message, 500));
-    // }
+    try {
+      await sendMail({
+        email: user.email,
+        subject: "Activate your account",
+        message: `Hello ${user.name}, please click on the link to activate your account: ${activationUrl}`,
+      });
+      res.status(201).json({
+        success: true,
+        message: `please check your email:- ${user.email} to activate your account!`,
+      });
+    } catch (error) {
+      return next(new ErrorHandler(error.message, 500));
+    }
   } catch (error) {
     return next(new ErrorHandler(error.message, 400));
   }
 });
 
 // create activation token
-// const createActivationToken = (user) => {
-//   return jwt.sign(user, process.env.ACTIVATION_SECRET, {
-//     expiresIn: "5m",
-//   });
-// };
+const createActivationToken = (user) => {
+  return jwt.sign(user, process.env.ACTIVATION_SECRET, {
+    expiresIn: "5m",
+  });
+};
 
 // // activate user
 // router.post(
