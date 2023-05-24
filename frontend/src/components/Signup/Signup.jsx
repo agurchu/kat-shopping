@@ -12,7 +12,6 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
   const [avatar, setAvatar] = useState(null);
-  const navigate = useNavigate();
 
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
@@ -32,9 +31,6 @@ export default function Signup() {
     axios
       .post(`${server}/user/create-user`, newForm, config)
       .then((res) => {
-        // if (res.data.success === true) {
-        //   navigate("/");
-        // }
         toast.success(res.data.message);
         setFullName("");
         setEmail("");
@@ -42,8 +38,7 @@ export default function Signup() {
         setAvatar();
       })
       .catch((err) => {
-        console.log(err.response.data.message);
-        toast.error("error");
+        toast.error("err.response.data.message");
       });
   };
 
