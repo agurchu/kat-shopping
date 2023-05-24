@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { RxAvatar } from "react-icons/rx";
 import axios from "axios";
 import { server } from "../../server";
+import { toast } from "react-toastify";
 
 export default function Signup() {
   const [fullName, setFullName] = useState("");
@@ -34,10 +35,15 @@ export default function Signup() {
         // if (res.data.success === true) {
         //   navigate("/");
         // }
-        console.log(res);
+        toast.success(res.data.message);
+        setFullName("");
+        setEmail("");
+        setPassword("");
+        setAvatar();
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response.data.message);
+        toast.error("error");
       });
   };
 
