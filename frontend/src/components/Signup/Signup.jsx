@@ -31,9 +31,10 @@ export default function Signup() {
     axios
       .post(`${server}/user/create-user`, newForm, config)
       .then((res) => {
-        if (res.data.success === true) {
-          navigate("/");
-        }
+        // if (res.data.success === true) {
+        //   navigate("/");
+        // }
+        console.log(res);
       })
       .catch((err) => {
         console.log(err);
