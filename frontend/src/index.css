@@ -19,6 +19,10 @@
   @apply bg-orange-700;
 }
 
+.section {
+  @apply w-11/12 mx-auto;
+}
+
 * {
   scroll-behavior: smooth;
 }

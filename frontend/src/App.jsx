@@ -1,26 +1,20 @@
 import "./App.css";
 import React, { useEffect } from "react";
-import { LoginPage, SignupPage, ActivationPage } from "./Routes.js";
+import { LoginPage, SignupPage, ActivationPage, HomePage } from "./Routes.js";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
-import { server } from "./server";
+import Store from "./redux/store";
+import { loadUser } from "./redux/actions/user";
 
 function App() {
   useEffect(() => {
-    axios
-      .get(`${server}/user/getuser`, { withCredentials: true })
-      .then((res) => {
-        toast.success(res.data.message);
-      })
-      .catch((err) => {
-        toast.error(err.response.data.message);
-      });
+    Store.dispatch(loadUser());
   }, []);
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/sign-up" element={<SignupPage />} />
         <Route
