@@ -23,6 +23,10 @@
   @apply w-11/12 mx-auto;
 }
 
+.button {
+  @apply w-[150px] bg-black h-[50px] my-3 flex items-center justify-center rounded-xl cursor-pointer;
+}
+
 * {
   scroll-behavior: smooth;
 }
