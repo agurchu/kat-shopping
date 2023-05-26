@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { productData } from "../../static/data";
+import { categoriesData, productData } from "../../static/data";
 import { AiOutlineSearch } from "react-icons/ai";
-import { IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import { BiMenuAltLeft } from "react-icons/bi";
+import DropDown from "./DropDown";
 
 export default function Header() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchData, setSearchData] = useState("");
   const [active, setActive] = useState(false);
+  const [dropDown, setDropDown] = useState(false);
 
   const handleSearchChange = (e) => {
     const term = e.target.value;
@@ -92,6 +94,20 @@ export default function Header() {
           <div>
             <div className="relative h-16 mt-2.5 w-[270px]  1000px:block">
               <BiMenuAltLeft size={30} className="absolute top-3 left-2" />
+              <button className="h-full w-full bg-white pl-10 flex justify-between items-center font-sans text-lg font-[500] select-none rounded-t-md">
+                All Categories
+              </button>
+              <IoIosArrowDown
+                size={20}
+                className="absolute right-2 top-4 cursor-pointer"
+                onClick={() => setDropDown(!dropDown)}
+              />
+              {dropDown ? (
+                <DropDown
+                  setDropDown={setDropDown}
+                  categoriesData={categoriesData}
+                />
+              ) : null}
             </div>
           </div>
         </div>
