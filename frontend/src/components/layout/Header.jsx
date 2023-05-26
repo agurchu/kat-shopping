@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { categoriesData, productData } from "../../static/data";
-import { AiOutlineSearch } from "react-icons/ai";
+import {
+  AiOutlineHeart,
+  AiOutlineSearch,
+  AiOutlineShoppingCart,
+} from "react-icons/ai";
+import { CgProfile } from "react-icons/cg";
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import { BiMenuAltLeft } from "react-icons/bi";
 import DropDown from "./DropDown";
@@ -88,12 +93,13 @@ export default function Header({ activeHeading }) {
       <div
         className={`${
           active === true ? " shadow-sm fixed top-0 left-0 z-10" : null
-        } transition hidden 800px:flex items-center justify-between w-full bg-orange-700 h-[70px]`}
+        } transition hidden 800px:flex items-center justify-between w-full bg-orange-600 h-[70px]`}
       >
         <div className="section relative normalFlex justify-between">
           {/* categories */}
           <div>
             <div className="relative h-16 mt-2.5 w-[270px]  1000px:block">
+              {/* hidden above */}
               <BiMenuAltLeft size={30} className="absolute top-3 left-2" />
               <button className="h-full w-full bg-white pl-10 flex justify-between items-center font-sans text-lg font-[500] select-none rounded-t-md">
                 All Categories
@@ -114,6 +120,28 @@ export default function Header({ activeHeading }) {
           {/* navitems */}
           <div className="normalFlex">
             <Navbar active={activeHeading} />
+          </div>
+
+          <div>
+            <div className="normalFlex">
+              <div className="relative cursor-pointer mr-4">
+                <AiOutlineHeart size={30} color="rgb(255 255 255/83%)" />
+                <span className="absolute right-0 top-0 bg-[#3423d1] rounded-full w-4 h-4 p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
+                  0
+                </span>
+              </div>
+              <div className="relative cursor-pointer mr-4">
+                <AiOutlineShoppingCart size={30} color="rgb(255 255 255/83%)" />
+                <span className="absolute right-0 top-0 bg-[#3423d1] rounded-full w-4 h-4 p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
+                  1
+                </span>
+              </div>
+              <div className="relative cursor-pointer mr-4">
+                <Link to="/login">
+                  <CgProfile size={30} color="rgb(255 255 255/83%)" />
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>

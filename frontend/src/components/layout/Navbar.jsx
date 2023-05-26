@@ -11,7 +11,7 @@ export default function Navbar({ active }) {
             <Link
               to={item.url}
               className={`${
-                active === index + 1 ? "text-[#a8dd17]" : "text-[#fff]"
+                active === index + 1 ? "text-[#3423d1]" : "text-[#fff]"
               } font-[500] px-6  cursor-pointer`}
             >
               {item.title}
