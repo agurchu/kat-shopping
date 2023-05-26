@@ -5,8 +5,9 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import { BiMenuAltLeft } from "react-icons/bi";
 import DropDown from "./DropDown";
+import Navbar from "./Navbar";
 
-export default function Header() {
+export default function Header({ activeHeading }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchData, setSearchData] = useState("");
   const [active, setActive] = useState(false);
@@ -109,6 +110,10 @@ export default function Header() {
                 />
               ) : null}
             </div>
+          </div>
+          {/* navitems */}
+          <div className="normalFlex">
+            <Navbar active={activeHeading} />
           </div>
         </div>
       </div>
