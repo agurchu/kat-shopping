@@ -9,6 +9,7 @@ import {
   AiOutlineStar,
 } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import ProductDetailsCard from "../productDetailsCard/ProductDetailsCard.jsx";
 
 export default function ProductCart({ data }) {
   const [click, setClick] = useState(false);
@@ -106,6 +107,9 @@ export default function ProductCart({ data }) {
             className="cursor-pointer absolute right-2 top-24"
             title="Add to cart"
           />
+          {open && (
+            <ProductDetailsCard open={open} setOpen={setOpen} data={data} />
+          )}
         </div>
       </div>
     </>

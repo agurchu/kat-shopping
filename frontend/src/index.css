@@ -42,6 +42,10 @@
   @apply font-[500] text-[16px] text-[#d55b45] pl-3 mt-[-4px] line-through;
 }
 
+.productTitle {
+  @apply font-[600] font-Roboto text-[#333];
+}
+
 .button {
   @apply w-[150px] bg-black h-[50px] my-3 flex items-center justify-center rounded-xl cursor-pointer;
 }
