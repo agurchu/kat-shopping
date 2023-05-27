@@ -19,8 +19,27 @@
   @apply bg-orange-700;
 }
 
+.mainGrid {
+  @apply grid grid-cols-1 gap-1 md:grid-cols-2 md:gap-2 xl:grid-cols-5 lg:grid-cols-3 lg:gap-5 xl:gap-7;
+}
+
+.heading {
+  @apply text-[27px] text-center md:text-start font-[600] font-Roboto pb-[20px];
+}
+
+.shop_name {
+  @apply pt-3 text-[15px] text-orange-400 pb-3;
+}
+
+.productDiscountPrice {
+  @apply font-bold text-[18px] text-[#333] font-Roboto;
+}
 .section {
   @apply w-11/12 mx-auto;
+}
+
+.price {
+  @apply font-[500] text-[16px] text-[#d55b45] pl-3 mt-[-4px] line-through;
 }
 
 .button {

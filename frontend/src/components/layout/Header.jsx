@@ -98,7 +98,7 @@ export default function Header({ activeHeading }) {
       >
         <div className="section relative normalFlex justify-between">
           {/* categories */}
-          <div>
+          <div onClick={() => setDropDown(!dropDown)}>
             <div className="relative h-16 mt-2.5 w-[270px]  1000px:block">
               {/* hidden above */}
               <BiMenuAltLeft size={30} className="absolute top-3 left-2" />

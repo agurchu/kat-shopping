@@ -27,7 +27,7 @@ export default function Categories() {
         </div>
       </div>
       <div id="categories" className="bg-white p-6 mb-12 rounded-lg section">
-        <div className="grid grid-cols-1 gap-1 md:grid-cols-2 md:gap-2 lg:grid-cols-4 lg:gap-5 xl:gap-7">
+        <div className="mainGrid">
           {categoriesData &&
             categoriesData.map((item) => (
               <div

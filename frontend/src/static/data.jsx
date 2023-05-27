@@ -1,3 +1,5 @@
+const exchangeRate = 19.66; // Exchange rate: 1 USD = 19,66  ZAR
+
 // navigation Data
 export const navItems = [
   {
@@ -261,6 +263,7 @@ export const categoriesData = [
 ];
 
 // product Data
+
 export const productData = [
   {
     id: 1,
@@ -286,8 +289,8 @@ export const productData = [
       },
       ratings: 4.2,
     },
-    price: 1099,
-    discount_price: 1049,
+    price: exchangeRate * 1099,
+    discount_price: exchangeRate * 1049,
     rating: 4,
     total_sell: 35,
     stock: 10,
@@ -316,7 +319,7 @@ export const productData = [
       },
       ratings: 4.2,
     },
-    discount_price: 1099,
+    discount_price: exchangeRate * 1099,
     rating: 5,
     total_sell: 80,
     stock: 10,
@@ -346,8 +349,8 @@ export const productData = [
       },
       ratings: 4.2,
     },
-    price: 1099,
-    discount_price: 1049,
+    price: exchangeRate * 1099,
+    discount_price: exchangeRate * 1049,
     rating: 4,
     total_sell: 75,
     stock: 10,
@@ -378,8 +381,8 @@ export const productData = [
       ratings: 4.2,
       category: "Others",
     },
-    price: 100,
-    discount_price: 79,
+    price: exchangeRate * 100,
+    discount_price: exchangeRate * 79,
     rating: 4,
     total_sell: 12,
     stock: 10,
@@ -408,8 +411,8 @@ export const productData = [
       },
       ratings: 4.2,
     },
-    price: 120,
-    discount_price: 89,
+    price: exchangeRate * 120,
+    discount_price: exchangeRate * 89,
     rating: 5,
     total_sell: 49,
     stock: 10,
@@ -438,8 +441,8 @@ export const productData = [
       },
       ratings: 4.2,
     },
-    price: 300,
-    discount_price: 239,
+    price: exchangeRate * 300,
+    discount_price: exchangeRate * 239,
     rating: 4.5,
     reviews: [
       {
@@ -477,8 +480,8 @@ export const productData = [
       },
       ratings: 4.2,
     },
-    price: 100,
-    discount_price: 79,
+    price: exchangeRate * 100,
+    discount_price: exchangeRate * 79,
     rating: 4,
     total_sell: 62,
     stock: 10,
@@ -506,8 +509,8 @@ export const productData = [
       },
       ratings: 4.2,
     },
-    price: 300,
-    discount_price: 239,
+    price: exchangeRate * 300,
+    discount_price: exchangeRate * 239,
     rating: 4.5,
     reviews: [
       {
@@ -545,7 +548,7 @@ export const productData = [
       },
       ratings: 4.2,
     },
-    discount_price: 1099,
+    discount_price: exchangeRate * 1099,
     rating: 5,
     total_sell: 20,
     stock: 10,
@@ -574,8 +577,8 @@ export const productData = [
       },
       ratings: 4.2,
     },
-    price: 300,
-    discount_price: 239,
+    price: exchangeRate * 300,
+    discount_price: exchangeRate * 239,
     rating: 4.5,
     reviews: [
       {
