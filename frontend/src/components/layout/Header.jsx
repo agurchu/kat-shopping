@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { categoriesData, productData } from "../../static/data";
 import {
@@ -27,14 +27,15 @@ export default function Header({ activeHeading }) {
     );
     setSearchData(filteredProducts);
   };
-
-  window.addEventListener("scroll", () => {
-    if (window.screenY > 70) {
-      setActive(true);
-    } else {
-      setActive(false);
-    }
-  });
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 70) {
+        setActive(true);
+      } else {
+        setActive(false);
+      }
+    });
+  }, []);
 
   return (
     <>
@@ -92,7 +93,7 @@ export default function Header({ activeHeading }) {
       </div>
       <div
         className={`${
-          active === true ? " shadow-sm fixed top-0 left-0 z-10" : null
+          active === true ? "shadow-sm fixed top-0 left-0 z-10" : ""
         } transition hidden 800px:flex items-center justify-between w-full bg-orange-600 h-[70px]`}
       >
         <div className="section relative normalFlex justify-between">
