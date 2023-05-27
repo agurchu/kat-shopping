@@ -46,7 +46,7 @@ export default function Header({ activeHeading }) {
             </Link>
           </div>
           {/* search box */}
-          <div className="relative w-[50%]">
+          <div className="relative w-[50%] mx-4">
             <input
               type="text"
               placeholder="Search Product"
