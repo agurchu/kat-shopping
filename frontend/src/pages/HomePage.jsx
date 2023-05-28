@@ -4,6 +4,7 @@ import Hero from "../components/route/hero/Hero";
 import Categories from "../components/route/categories/Categories";
 import BestDeals from "../components/route/bestDeals/BestDeals";
 import FeaturedProduct from "../components/route/featuredProduct/FeaturedProduct";
+import Events from "../components/events/Events";
 
 export default function HomePage() {
   return (
@@ -12,6 +13,7 @@ export default function HomePage() {
       <Hero />
       <Categories />
       <BestDeals />
+      <Events />
       <FeaturedProduct />
     </div>
   );
