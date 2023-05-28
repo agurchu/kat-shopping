@@ -7,7 +7,7 @@ import {
   AiOutlineStar,
 } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import Favourite from "../../../components/usablePieces/Favourite.jsx";
+import Favourite from "../../usablePieces/Favourite.jsx";
 import ProductDetailsCard from "../productDetailsCard/ProductDetailsCard.jsx";
 
 export default function ProductCart({ data }) {

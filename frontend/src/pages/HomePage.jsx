@@ -1,8 +1,9 @@
 import React from "react";
 import Header from "../components/layout/Header";
 import Hero from "../components/route/hero/Hero";
-import Categories from "../components/route/categories/Categories.jsx";
-import BestDeals from "../components/route/bestDeals/BestDeals.jsx";
+import Categories from "../components/route/categories/Categories";
+import BestDeals from "../components/route/bestDeals/BestDeals";
+import FeaturedProduct from "../components/route/featuredProduct/FeaturedProduct";
 
 export default function HomePage() {
   return (
@@ -11,6 +12,7 @@ export default function HomePage() {
       <Hero />
       <Categories />
       <BestDeals />
+      <FeaturedProduct />
     </div>
   );
 }
