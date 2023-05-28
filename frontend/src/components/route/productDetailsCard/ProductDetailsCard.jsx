@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { RxCross1 } from "react-icons/rx";
-import { AiFillHeart, AiOutlineHeart, AiOutlineMessage } from "react-icons/ai";
+import {
+  AiFillHeart,
+  AiOutlineHeart,
+  AiOutlineMessage,
+  AiOutlineShoppingCart,
+} from "react-icons/ai";
 import Favourite from "../../usablePieces/Favourite";
 
 export default function ProductDetailsCard({ setOpen, data, open }) {
@@ -40,10 +45,7 @@ export default function ProductDetailsCard({ setOpen, data, open }) {
                     <h4 className="pb-3 text-sm">{data.shop.ratings}</h4>
                   </div>
                 </div>
-                <div
-                  onClick={handleMessageSubmit}
-                  className="bg-black rounded w-[150px] cursor-pointer mt-4 h-11 normalFlex justify-center"
-                >
+                <div onClick={handleMessageSubmit} className="button2">
                   <span className="text-white flex items-center">
                     Send Message <AiOutlineMessage className="ml-1" />{" "}
                   </span>
@@ -84,6 +86,11 @@ export default function ProductDetailsCard({ setOpen, data, open }) {
                   <div>
                     <Favourite size={30} />
                   </div>
+                </div>
+                <div className="button2">
+                  <span className="normalFlex text-white">
+                    Add to cart <AiOutlineShoppingCart className="ml-1" />
+                  </span>
                 </div>
               </div>
             </div>

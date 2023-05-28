@@ -20,7 +20,7 @@
 }
 
 .mainGrid {
-  @apply grid grid-cols-1 gap-1 md:grid-cols-2 md:gap-2 xl:grid-cols-5 lg:grid-cols-3 lg:gap-5 xl:gap-7;
+  @apply grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6 xl:grid-cols-5 lg:grid-cols-3 lg:gap-6 xl:gap-7 mb-12 border-0;
 }
 
 .heading {
@@ -48,6 +48,10 @@
 
 .button {
   @apply w-[150px] bg-black h-[50px] my-3 flex items-center justify-center rounded-xl cursor-pointer;
+}
+
+.button2 {
+  @apply bg-black rounded w-[150px] cursor-pointer mt-6 h-11 normalFlex justify-center;
 }
 
 * {
