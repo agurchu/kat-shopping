@@ -1,18 +1,16 @@
 import { set } from "mongoose";
 import React, { useState } from "react";
 import {
-  AiFillHeart,
   AiFillStar,
   AiOutlineEye,
-  AiOutlineHeart,
   AiOutlineShoppingCart,
   AiOutlineStar,
 } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import Favourite from "../../../components/usablePieces/Favourite.jsx";
 import ProductDetailsCard from "../productDetailsCard/ProductDetailsCard.jsx";
 
 export default function ProductCart({ data }) {
-  const [click, setClick] = useState(false);
   const [open, setOpen] = useState(false);
 
   const product_name = data.name.replace(/\s+/g, "-");
@@ -76,23 +74,8 @@ export default function ProductCart({ data }) {
         </Link>
         {/* side options */}
         <div>
-          {click ? (
-            <AiFillHeart
-              onClick={() => setClick(!click)}
-              color={click ? "red" : "#333"}
-              size={22}
-              className="cursor-pointer absolute right-2 top-5"
-              title="Remove from wishlist"
-            />
-          ) : (
-            <AiOutlineHeart
-              onClick={() => setClick(!click)}
-              color={click ? "red" : "#333"}
-              size={22}
-              className="cursor-pointer absolute right-2 top-5"
-              title="Add to wishlist"
-            />
-          )}
+          <Favourite size={22} style={"absolute right-2 top-5"} />
+
           <AiOutlineEye
             onClick={() => setOpen(!open)}
             color="#333"

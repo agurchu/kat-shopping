@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { RxCross1 } from "react-icons/rx";
-import { AiOutlineMessage } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart, AiOutlineMessage } from "react-icons/ai";
+import Favourite from "../../usablePieces/Favourite";
 
 export default function ProductDetailsCard({ setOpen, data, open }) {
   const [count, setCount] = useState(1);
@@ -8,12 +9,18 @@ export default function ProductDetailsCard({ setOpen, data, open }) {
   const [select, setSelect] = useState(false);
 
   const handleMessageSubmit = () => {};
+  const decrementCount = () => {
+    if (count > 1) setCount(count - 1);
+  };
+  const incrementCount = () => {
+    setCount(count + 1);
+  };
 
   return (
     <div className="bg-white">
       {data && (
         <div className="fixed z-40 bg-[#00000030] top-0 w-full h-screen left-0 normalFlex justify-center">
-          <div className="bg-white relative w-[90%] h-[90vh] rounded-md p-4 shadow-sm overflow-y-scroll 800px:w-[60%] 800px:h-[75vh]">
+          <div className="bg-white relative w-[90%] h-[90vh] rounded-md p-4 shadow-sm overflow-y-scroll lg:w-[60%] lg:h-[75vh]">
             <RxCross1
               size={30}
               className="absolute right-3 top-3 z-50"
@@ -45,7 +52,7 @@ export default function ProductDetailsCard({ setOpen, data, open }) {
                   {data.total_sell} Sold out
                 </h5>
               </div>
-              <div className="w-full pt-5 px-2 800px:w-[50">
+              <div className="w-full pt-5 px-2 800px:w-[50%]">
                 <h1 className="text-xl productTitle">{data.name}</h1>
                 <p>{data.description}</p>
                 <div className="flex pt-3">
@@ -55,6 +62,28 @@ export default function ProductDetailsCard({ setOpen, data, open }) {
                   <h3 className="price">
                     {data.price ? "R" + data.price : null}
                   </h3>
+                </div>
+                <div className="normalFlex mt-12 justify-between pr-3">
+                  <div>
+                    <button
+                      onClick={decrementCount}
+                      className="bg-gradient-to-r from-teal-400 to-teal-500 text-white font-bold rounded-l px-4 py-2 shadow-lg hover:opacity-75 transition duration-[250ms]"
+                    >
+                      -
+                    </button>
+                    <div className="bg-gray-200 inline-flex justify-center w-10 py-2 font-medium text-gray-800 ">
+                      {count}
+                    </div>
+                    <button
+                      onClick={incrementCount}
+                      className="bg-gradient-to-r from-teal-400 to-teal-500 text-white font-bold rounded-r px-4 py-2 shadow-lg hover:opacity-75 transition duration-[250ms]"
+                    >
+                      +
+                    </button>
+                  </div>
+                  <div>
+                    <Favourite size={30} />
+                  </div>
                 </div>
               </div>
             </div>
