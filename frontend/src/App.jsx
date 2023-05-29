@@ -8,6 +8,7 @@ import {
   ProductPage,
   BestSellingPage,
   EventsPage,
+  FAQPage,
 } from "./Routes.js";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -32,6 +33,7 @@ function App() {
         <Route path="/products" element={<ProductPage />} />
         <Route path="/best-selling" element={<BestSellingPage />} />
         <Route path="/events" element={<EventsPage />} />
+        <Route path="/faq" element={<FAQPage />} />
       </Routes>
       <ToastContainer
         position="bottom-center"
