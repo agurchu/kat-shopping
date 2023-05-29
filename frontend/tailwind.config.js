@@ -14,6 +14,9 @@ export default {
         "1300px": "1300px",
         "400px": "400px",
       },
+      gridTemplateColumns: {
+        footer: "minmax(300px, 350px) 1fr",
+      },
     },
   },
   plugins: [],

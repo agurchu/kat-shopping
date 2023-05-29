@@ -53,7 +53,7 @@ export default function Header({ activeHeading }) {
               placeholder="Search Product"
               value={searchTerm}
               onChange={handleSearchChange}
-              className="border-orange-600 rounded-md w-full border-2 px-2 h-10"
+              className="border-black rounded-md w-full border-2 px-2 h-10"
             />
             <AiOutlineSearch
               size={30}
@@ -94,7 +94,7 @@ export default function Header({ activeHeading }) {
       <div
         className={`${
           active === true ? "shadow-sm fixed top-0 left-0 z-10" : ""
-        } transition hidden 800px:flex items-center justify-between w-full bg-orange-600 h-[70px]`}
+        } transition hidden 800px:flex items-center justify-between w-full bg-black h-[70px]`}
       >
         <div className="section relative normalFlex justify-between">
           {/* categories */}
@@ -127,13 +127,13 @@ export default function Header({ activeHeading }) {
             <div className="normalFlex">
               <div className="relative cursor-pointer mr-4">
                 <AiOutlineHeart size={30} color="rgb(255 255 255/83%)" />
-                <span className="absolute right-0 top-0 bg-[#3423d1] rounded-full w-4 h-4 p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
+                <span className="absolute right-0 top-0 bg-orange-600 rounded-full w-4 h-4 p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
                   0
                 </span>
               </div>
               <div className="relative cursor-pointer mr-4">
                 <AiOutlineShoppingCart size={30} color="rgb(255 255 255/83%)" />
-                <span className="absolute right-0 top-0 bg-[#3423d1] rounded-full w-4 h-4 p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
+                <span className="absolute right-0 top-0 bg-orange-600 rounded-full w-4 h-4 p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
                   1
                 </span>
               </div>

@@ -28,7 +28,7 @@
 }
 
 .shop_name {
-  @apply pt-3 text-[15px] text-orange-400 pb-3;
+  @apply pt-3 text-[15px] text-orange-600 pb-3;
 }
 
 .productDiscountPrice {
@@ -40,6 +40,10 @@
 
 .price {
   @apply font-[500] text-[16px] text-[#d55b45] pl-3 mt-[-4px] line-through;
+}
+
+.item-hover {
+  @apply hover:text-orange-600 transition ease-in-out duration-[250ms];
 }
 
 .productTitle {

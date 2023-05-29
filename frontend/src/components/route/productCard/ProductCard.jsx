@@ -17,7 +17,6 @@ export default function ProductCart({ data }) {
   return (
     <>
       <div className="w-full h-[370px] bg-white rounded-lg overflow-hidden shadow-sm p-3 relative cursor-pointer">
-        <div></div>
         <Link to={`/product/${product_name}`}>
           <img
             className="w-full h-[170px] object-contain"
