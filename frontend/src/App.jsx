@@ -6,6 +6,8 @@ import {
   ActivationPage,
   HomePage,
   ProductPage,
+  BestSellingPage,
+  EventsPage,
 } from "./Routes.js";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -28,6 +30,8 @@ function App() {
           element={<ActivationPage />}
         />
         <Route path="/products" element={<ProductPage />} />
+        <Route path="/best-selling" element={<BestSellingPage />} />
+        <Route path="/events" element={<EventsPage />} />
       </Routes>
       <ToastContainer
         position="bottom-center"
