@@ -11,8 +11,11 @@ import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import { BiMenuAltLeft } from "react-icons/bi";
 import DropDown from "./DropDown";
 import Navbar from "./Navbar";
+import { useSelector } from "react-redux";
+import { backend_url } from "../../server";
 
 export default function Header({ activeHeading }) {
+  const { isAuthenticated, user } = useSelector((state) => state.user);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchData, setSearchData] = useState("");
   const [active, setActive] = useState(false);
@@ -138,9 +141,19 @@ export default function Header({ activeHeading }) {
                 </span>
               </div>
               <div className="relative cursor-pointer mr-4">
-                <Link to="/login">
-                  <CgProfile size={30} color="rgb(255 255 255/83%)" />
-                </Link>
+                {isAuthenticated ? (
+                  <Link to="/profile">
+                    <img
+                      className="w-[33px] h-[33px] rounded-full"
+                      src={`${backend_url}${user.avatar}`}
+                      alt="profile"
+                    />
+                  </Link>
+                ) : (
+                  <Link to="/login">
+                    <CgProfile size={30} color="rgb(255 255 255/83%)" />
+                  </Link>
+                )}
               </div>
             </div>
           </div>
