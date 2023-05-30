@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { RxAvatar } from "react-icons/rx";
 import axios from "axios";
 import { server } from "../../server";
@@ -18,28 +18,28 @@ export default function Signup() {
     setAvatar(file);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const config = { headers: { "Content-Type": "multipart/form-data" } };
     const newForm = new FormData();
-
     newForm.append("file", avatar);
     newForm.append("fullName", fullName);
     newForm.append("email", email);
     newForm.append("password", password);
-
-    axios
-      .post(`${server}/user/create-user`, newForm, config)
-      .then((res) => {
-        toast.success(res.data.message);
-        setFullName("");
-        setEmail("");
-        setPassword("");
-        setAvatar();
-      })
-      .catch((err) => {
-        toast.error("err.response.data.message");
-      });
+    try {
+      const response = await axios.post(
+        `${server}/user/create-user`,
+        newForm,
+        config
+      );
+      toast.success(response.data.message);
+      setFullName("");
+      setEmail("");
+      setPassword("");
+      setAvatar();
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
   };
 
   const passwordType = () => {

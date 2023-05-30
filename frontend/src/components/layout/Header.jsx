@@ -13,6 +13,7 @@ import DropDown from "./DropDown";
 import Navbar from "./Navbar";
 import { useSelector } from "react-redux";
 import { backend_url } from "../../server";
+import Cart from "../cart/Cart";
 
 export default function Header({ activeHeading }) {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -20,6 +21,8 @@ export default function Header({ activeHeading }) {
   const [searchData, setSearchData] = useState("");
   const [active, setActive] = useState(false);
   const [dropDown, setDropDown] = useState(false);
+  const [openCart, setOpenCart] = useState(false);
+  const [openWishList, setOpenWishList] = useState(false);
 
   const handleSearchChange = (e) => {
     const term = e.target.value;
@@ -135,7 +138,11 @@ export default function Header({ activeHeading }) {
                 </span>
               </div>
               <div className="relative cursor-pointer mr-4">
-                <AiOutlineShoppingCart size={30} color="rgb(255 255 255/83%)" />
+                <AiOutlineShoppingCart
+                  onClick={() => setOpenCart(true)}
+                  size={30}
+                  color="rgb(255 255 255/83%)"
+                />
                 <span className="absolute right-0 top-0 bg-orange-600 rounded-full w-4 h-4 p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
                   1
                 </span>
@@ -156,6 +163,8 @@ export default function Header({ activeHeading }) {
                 )}
               </div>
             </div>
+            {/* cart popup */}
+            {openCart ? <Cart setOpenCart={setOpenCart} /> : null}
           </div>
         </div>
       </div>
