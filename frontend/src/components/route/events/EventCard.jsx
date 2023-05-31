@@ -22,10 +22,14 @@ export default function EventCard({ active }) {
           <div className="flex mb-6 2xl:w-[50%] lg:w-full md:w-[50%] justify-between">
             <div className="flex">
               <h5 className="text-red-500 pr-3 line-through font-medium text-lg">
-                R{1099 * 19.66}
+                R
+                {(1099 * 19.66)
+                  .toFixed(2)
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
               </h5>
               <h5 className="text-[#333] font-Roboto font-bold text-xl">
-                R{999 * 19.66}
+                R
+                {(999 * 19.66).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
               </h5>
             </div>
             <span className="pr-3 text-green-500 font-normal text-lg">

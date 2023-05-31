@@ -62,9 +62,19 @@ export default function ProductCart({ data }) {
           <div className="py-2 normalFlex justify-between">
             <div className="flex">
               <h5 className="productDiscountPrice">
-                R{data.price === 0 ? data.price : data.discount_price}
+                R
+                {data.price === 0
+                  ? data.price.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                  : data.discount_price
+                      .toFixed(2)
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
               </h5>
-              <h4 className="price">{data.price ? "R" + data.price : null}</h4>
+              <h4 className="price">
+                {data.price
+                  ? "R" +
+                    data.price.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                  : null}
+              </h4>
             </div>
             <span className="font-normal text-lg text-green-500 ">
               {data.total_sell} sold
