@@ -14,6 +14,7 @@ import Navbar from "./Navbar";
 import { useSelector } from "react-redux";
 import { backend_url } from "../../server";
 import Cart from "../cart/Cart";
+import Wishlist from "../wishlist/Wishlist";
 
 export default function Header({ activeHeading }) {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -131,18 +132,20 @@ export default function Header({ activeHeading }) {
 
           <div>
             <div className="normalFlex">
-              <div className="relative cursor-pointer mr-4">
+              <div
+                onClick={() => setOpenWishList(true)}
+                className="relative cursor-pointer mr-4"
+              >
                 <AiOutlineHeart size={30} color="rgb(255 255 255/83%)" />
                 <span className="absolute right-0 top-0 bg-orange-600 rounded-full w-4 h-4 p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
                   0
                 </span>
               </div>
-              <div className="relative cursor-pointer mr-4">
-                <AiOutlineShoppingCart
-                  onClick={() => setOpenCart(true)}
-                  size={30}
-                  color="rgb(255 255 255/83%)"
-                />
+              <div
+                onClick={() => setOpenCart(true)}
+                className="relative cursor-pointer mr-4"
+              >
+                <AiOutlineShoppingCart size={30} color="rgb(255 255 255/83%)" />
                 <span className="absolute right-0 top-0 bg-orange-600 rounded-full w-4 h-4 p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
                   1
                 </span>
@@ -165,6 +168,11 @@ export default function Header({ activeHeading }) {
             </div>
             {/* cart popup */}
             {openCart ? <Cart setOpenCart={setOpenCart} /> : null}
+
+            {/* wishlist popup */}
+            {openWishList ? (
+              <Wishlist setOpenWishList={setOpenWishList} />
+            ) : null}
           </div>
         </div>
       </div>

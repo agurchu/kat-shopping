@@ -9,6 +9,10 @@ import {
   BestSellingPage,
   EventsPage,
   FAQPage,
+  CheckoutPage,
+  PaymentPage,
+  OrderSuccessPage,
+  ProductDetailsPage,
 } from "./Routes.js";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -38,6 +42,10 @@ function App() {
             <Route path="/best-selling" element={<BestSellingPage />} />
             <Route path="/events" element={<EventsPage />} />
             <Route path="/faq" element={<FAQPage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/payment" element={<PaymentPage />} />
+            <Route path="/order/success/:id" element={<OrderSuccessPage />} />
+            <Route path="/product/:name" element={<ProductDetailsPage />} />
           </Routes>
           <ToastContainer
             position="bottom-center"
