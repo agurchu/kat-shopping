@@ -3,6 +3,7 @@ import Favourite from "./Favourite";
 
 export default function IncrementBtn() {
   const [count, setCount] = useState(1);
+
   const decrementCount = () => {
     if (count > 1) setCount(count - 1);
   };

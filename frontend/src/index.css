@@ -26,7 +26,9 @@
 .heading {
   @apply text-[27px] text-center md:text-start font-[600] font-Roboto pb-[20px];
 }
-
+.active_indicator {
+  @apply absolute bottom-[-27%] left-0 h-[3px] w-full bg-[crimson];
+}
 .shop_name {
   @apply pt-3 text-[15px] text-orange-600 pb-3;
 }

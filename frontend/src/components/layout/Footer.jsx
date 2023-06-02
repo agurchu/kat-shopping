@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 export default function Footer() {
   return (
     <div className="bg-black text-neutral-500">
-      <div className="py-7 bg-cover bg-no-repeat bg-center bg-[url(extensive-ecommerce-banner.jpg)]  text-white px-4 md:flex md:items-center md:justify-between sm:px-12 ">
+      <div className="py-7 bg-cover bg-no-repeat bg-center !bg-[url(extensive-ecommerce-banner.jpg)]  text-white px-4 md:flex md:items-center md:justify-between sm:px-12 ">
         <h1 className="font-semibold text-3xl mb-6 lg:text-4xl lg:leading-normal lg:w-2/4 md:w-2/5">
           <span className="text-green-500">Subscribe</span> us for news events
           and offers
