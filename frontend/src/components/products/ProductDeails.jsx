@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import IncrementBtn from "../usablePieces/incrementBtn";
 import { AiOutlineMessage, AiOutlineShoppingCart } from "react-icons/ai";
 
@@ -192,6 +192,11 @@ function ProductDetailsInfo({ data }) {
               <h5 className="font-semibold mt-3">
                 Total Reviews: <span className="font-medium">523</span>
               </h5>
+              <Link to="/">
+                <div className="button !rounded !h-10 ">
+                  <h4 className="text-white">Visit Shop</h4>
+                </div>
+              </Link>
             </div>
           </div>
         </div>
