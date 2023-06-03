@@ -25,7 +25,7 @@ import { getAllOrdersOfUser } from "../../redux/actions/order";
 
 export default function ProfileContent({ active }) {
   const { user, error, successMessage } = useSelector((state) => state.user);
-  const [name, setName] = useState(user && user.name);
+  const [fullName, setFullName] = useState(user && user.fullName);
   const [email, setEmail] = useState(user && user.email);
   const [phoneNumber, setPhoneNumber] = useState(user && user.phoneNumber);
   const [password, setPassword] = useState("");
@@ -45,7 +45,7 @@ export default function ProfileContent({ active }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateUserInformation(name, email, phoneNumber, password));
+    dispatch(updateUserInformation(fullName, email, phoneNumber, password));
   };
 
   const handleImage = async (e) => {
@@ -84,7 +84,7 @@ export default function ProfileContent({ active }) {
                 className="w-[150px] h-[150px] rounded-full object-cover border-[3px] border-[#3ad132]"
                 alt=""
               />
-              <div className="w-[30px] h-[30px] bg-[#E3E9EE] rounded-full flex items-center justify-center cursor-pointer absolute bottom-[5px] right-[5px]">
+              <div className="w-[30px] h-[30px] bg-[#eee8e3] rounded-full flex items-center justify-center cursor-pointer absolute bottom-[5px] right-[5px]">
                 <input
                   type="file"
                   id="image"
@@ -108,8 +108,8 @@ export default function ProfileContent({ active }) {
                     type="text"
                     className="input !w-[95%] mb-4 800px:mb-0"
                     required
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
                   />
                 </div>
                 <div className=" w-[100%] 800px:w-[50%]">
@@ -544,13 +544,13 @@ const Address = () => {
 
   const addressTypeData = [
     {
-      name: "Default",
+      fullName: "Default",
     },
     {
-      name: "Home",
+      fullName: "Home",
     },
     {
-      name: "Office",
+      fullName: "Office",
     },
   ];
 
@@ -606,7 +606,7 @@ const Address = () => {
                   <div className="w-full pb-2">
                     <label className="block pb-2">Country</label>
                     <select
-                      name=""
+                      fullName=""
                       id=""
                       value={country}
                       onChange={(e) => setCountry(e.target.value)}
@@ -622,7 +622,7 @@ const Address = () => {
                             key={item.isoCode}
                             value={item.isoCode}
                           >
-                            {item.name}
+                            {item.fullName}
                           </option>
                         ))}
                     </select>
@@ -631,7 +631,7 @@ const Address = () => {
                   <div className="w-full pb-2">
                     <label className="block pb-2">Choose your City</label>
                     <select
-                      name=""
+                      fullName=""
                       id=""
                       value={city}
                       onChange={(e) => setCity(e.target.value)}
@@ -647,7 +647,7 @@ const Address = () => {
                             key={item.isoCode}
                             value={item.isoCode}
                           >
-                            {item.name}
+                            {item.fullName}
                           </option>
                         ))}
                     </select>
@@ -688,7 +688,7 @@ const Address = () => {
                   <div className="w-full pb-2">
                     <label className="block pb-2">Address Type</label>
                     <select
-                      name=""
+                      fullName=""
                       id=""
                       value={addressType}
                       onChange={(e) => setAddressType(e.target.value)}
@@ -701,10 +701,10 @@ const Address = () => {
                         addressTypeData.map((item) => (
                           <option
                             className="block pb-2"
-                            key={item.name}
-                            value={item.name}
+                            key={item.fullName}
+                            value={item.fullName}
                           >
-                            {item.name}
+                            {item.fullName}
                           </option>
                         ))}
                     </select>
