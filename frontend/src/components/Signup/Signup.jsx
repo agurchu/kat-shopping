@@ -27,11 +27,7 @@ export default function Signup() {
     newForm.append("email", email);
     newForm.append("password", password);
     try {
-      const response = await axios.post(
-        `${server}/user/create-user`,
-        newForm,
-        config
-      );
+      const response = await axios.post("/user/create-user", newForm, config);
       toast.success(response.data.message);
       setFullName("");
       setEmail("");

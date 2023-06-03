@@ -1,6 +1,7 @@
 const express = require("express");
 const ErrorHandler = require("./middleware/error");
 const app = express();
+const user = require("./controller/user");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -23,9 +24,7 @@ if (process.env.NODE_ENV !== "PRODUCTION") {
   });
 }
 
-// import routes
-const user = require("./controller/user");
-app.use("/api/v2/user", user);
+app.use("/user", user);
 
 // for ErrorHandling
 app.use(ErrorHandler);
