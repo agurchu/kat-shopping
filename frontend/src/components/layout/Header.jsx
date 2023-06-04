@@ -192,7 +192,7 @@ export default function Header({ activeHeading }) {
           <div>
             <BiMenuAltLeft
               size={40}
-              className="ml-4"
+              className="ml-4 cursor-pointer"
               onClick={() => setOpen(true)}
             />
           </div>
@@ -220,7 +220,7 @@ export default function Header({ activeHeading }) {
           {openCart && <Cart setOpenCart={setOpenCart} />}
 
           {/* wishlist popup */}
-          {openWishList && <Wishlist setOpenWishlist={setOpenWishList} />}
+          {openWishList && <Wishlist setOpenWishList={setOpenWishList} />}
         </div>
 
         {/* header sidebar */}
@@ -236,14 +236,14 @@ export default function Header({ activeHeading }) {
                     onClick={() => setOpenWishList(true) || setOpen(false)}
                   >
                     <AiOutlineHeart size={30} className="mt-5 ml-3" />
-                    <span class="absolute right-0 top-0 rounded-full bg-orange-600 w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px]  leading-tight text-center">
+                    <span className="absolute right-0 top-0 rounded-full bg-orange-600 w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px]  leading-tight text-center">
                       {wishlist && wishlist.length}
                     </span>
                   </div>
                 </div>
                 <RxCross1
                   size={30}
-                  className="ml-4 mt-5"
+                  className="ml-4 mt-5 cursor-pointer"
                   onClick={() => setOpen(false)}
                 />
               </div>
@@ -258,12 +258,12 @@ export default function Header({ activeHeading }) {
                 />
                 {searchData && (
                   <div className="absolute bg-[#fff] z-10 shadow w-full left-0 p-3">
-                    {searchData.map((i) => {
+                    {searchData.map((i, index) => {
                       const d = i.name;
 
                       const Product_name = d.replace(/\s+/g, "-");
                       return (
-                        <Link to={`/product/${Product_name}`}>
+                        <Link key={index} to={`/product/${Product_name}`}>
                           <div className="flex items-center">
                             <img
                               src={i.image_Url[0].url}
@@ -280,7 +280,7 @@ export default function Header({ activeHeading }) {
               </div>
 
               <Navbar active={activeHeading} />
-              <div className={`${styles.button} ml-4 !rounded-[4px]`}>
+              <div className={`button !ml-4 !rounded-[4px]`}>
                 <Link to="/shop-create">
                   <h1 className="text-[#fff] flex items-center">
                     Become Seller <IoIosArrowForward className="ml-1" />

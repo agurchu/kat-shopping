@@ -4,15 +4,17 @@ import { Link } from "react-router-dom";
 
 export default function Navbar({ active }) {
   return (
-    <div className="normalFlex">
+    <div className="800px:flex block">
       {navItems &&
         navItems.map((item, index) => (
-          <div key={index}>
+          <div className="flex" key={index}>
             <Link
               to={item.url}
               className={`${
-                active === index + 1 ? "text-orange-600" : "text-[#fff]"
-              } font-[500] px-6  cursor-pointer`}
+                active === index + 1
+                  ? "text-orange-600"
+                  : "text-black 800px:text-[#fff]"
+              } pb-[30px] 800px:pb-0 font-[500] px-6  cursor-pointer`}
             >
               {item.title}
             </Link>
