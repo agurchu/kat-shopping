@@ -23,7 +23,7 @@ export default function Cart({ setOpenCart }) {
   ];
   return (
     <div className="h-screen z-10 fixed bg-[#0000004b] top-0 left-0 right-0">
-      <div className="bg-white fixed top-0 right-0 lg:w-2/5 w-2/4 min-h-full flex shadow-sm flex-col justify-between">
+      <div className="bg-white fixed top-0 right-0 lg:w-2/5 w-full sm:w-2/4 min-h-full flex shadow-sm flex-col justify-between">
         <div>
           <div className="flex w-full pt-5 pr-5 justify-end">
             <RxCross1
@@ -46,7 +46,7 @@ export default function Cart({ setOpenCart }) {
               ))}
           </div>
         </div>
-        <div>
+        <div className="section mb-4">
           {/* checkout buttons */}
           <Link>
             <div className="bg-orange-600 w-full h-11 normalFlex justify-center rounded-md">

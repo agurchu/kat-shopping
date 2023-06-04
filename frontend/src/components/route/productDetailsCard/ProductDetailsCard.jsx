@@ -19,7 +19,7 @@ export default function ProductDetailsCard({ setOpen, data, open }) {
     <div className="bg-white">
       {data && (
         <div className="fixed z-40 bg-[#00000030] top-0 w-full h-screen left-0 normalFlex justify-center">
-          <div className="bg-white relative w-[90%] h-[90vh] rounded-md p-4 shadow-sm overflow-y-scroll lg:w-[60%] lg:h-[75vh]">
+          <div className="bg-white relative w-[90%] h-[90vh] rounded-md mt-16 p-4 shadow-sm overflow-y-scroll lg:w-[60%] lg:h-[75vh]">
             <RxCross1
               size={30}
               className="absolute right-3 top-3 z-50"
