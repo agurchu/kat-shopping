@@ -22,6 +22,7 @@ import Store from "./redux/store";
 import { loadUser } from "./redux/actions/user";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.withCredentials = true;
@@ -51,7 +52,14 @@ function App() {
             <Route path="/payment" element={<PaymentPage />} />
             <Route path="/order/success/:id" element={<OrderSuccessPage />} />
             <Route path="/product/:name" element={<ProductDetailsPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
+            <Route
+              path="/profile"
+              element={
+                <ProfilePage>
+                  <ProfilePage />
+                </ProfilePage>
+              }
+            />
           </Routes>
           <ToastContainer
             position="bottom-center"
