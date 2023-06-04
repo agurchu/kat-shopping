@@ -1,50 +1,34 @@
 import { createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
-  isLoading: true,
+  wishlist: localStorage.getItem("wishlistItems")
+    ? JSON.parse(localStorage.getItem("wishlistItems"))
+    : [],
 };
 
-export const orderReducer = createReducer(initialState, {
-  // get all orders of user
-  getAllOrdersUserRequest: (state) => {
-    state.isLoading = true;
-  },
-  getAllOrdersUserSuccess: (state, action) => {
-    state.isLoading = false;
-    state.orders = action.payload;
-  },
-  getAllOrdersUserFailed: (state, action) => {
-    state.isLoading = false;
-    state.error = action.payload;
-  },
-
-  // get all orders of shop
-  getAllOrdersShopRequest: (state) => {
-    state.isLoading = true;
-  },
-  getAllOrdersShopSuccess: (state, action) => {
-    state.isLoading = false;
-    state.orders = action.payload;
-  },
-  getAllOrdersShopFailed: (state, action) => {
-    state.isLoading = false;
-    state.error = action.payload;
+export const wishlistReducer = createReducer(initialState, {
+  addToWishlist: (state, action) => {
+    const item = action.payload;
+    const isItemExist = state.wishlist.find((i) => i._id === item._id);
+    if (isItemExist) {
+      return {
+        ...state,
+        wishlist: state.wishlist.map((i) =>
+          i._id === isItemExist._id ? item : i
+        ),
+      };
+    } else {
+      return {
+        ...state,
+        wishlist: [...state.wishlist, item],
+      };
+    }
   },
 
-  // get all orders for admin
-  adminAllOrdersRequest: (state) => {
-    state.adminOrderLoading = true;
-  },
-  adminAllOrdersSuccess: (state, action) => {
-    state.adminOrderLoading = false;
-    state.adminOrders = action.payload;
-  },
-  adminAllOrdersFailed: (state, action) => {
-    state.adminOrderLoading = false;
-    state.error = action.payload;
-  },
-
-  clearErrors: (state) => {
-    state.error = null;
+  removeFromWishlist: (state, action) => {
+    return {
+      ...state,
+      wishlist: state.wishlist.filter((i) => i._id !== action.payload),
+    };
   },
 });
