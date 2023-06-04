@@ -1,4 +1,6 @@
 import React from "react";
+import kj_dev_logo from "../../assets/kj_dev_logo.png";
+
 import {
   AiFillFacebook,
   AiFillInstagram,
@@ -36,7 +38,7 @@ export default function Footer() {
         <div className=" normalFlex text-neutral-300 text-center flex-col px-5 md:text-start sm:block">
           <img
             className="mb-3 mx-auto md:mx-0 w-[200px]"
-            src="kj_dev_logo.png"
+            src={kj_dev_logo}
             alt="logo"
           />
           <p>The home and elements needed to create beautiful products</p>
