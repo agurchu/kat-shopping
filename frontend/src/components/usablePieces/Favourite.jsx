@@ -1,14 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
-export default function Favourite({ size, style }) {
-  const [click, setClick] = useState(false);
+export default function Favourite({
+  click,
+  data,
+  size,
+  style,
+  onAddToWishlist,
+  onRemoveFromWishlist,
+}) {
   return (
     <>
       {" "}
       {click ? (
         <AiFillHeart
-          onClick={() => setClick(!click)}
+          onClick={() => onRemoveFromWishlist(data)}
           color={click ? "red" : "#333"}
           size={size}
           className={`cursor-pointer ${style}`}
@@ -16,7 +22,7 @@ export default function Favourite({ size, style }) {
         />
       ) : (
         <AiOutlineHeart
-          onClick={() => setClick(!click)}
+          onClick={() => onAddToWishlist(data)}
           color={click ? "red" : "#333"}
           size={size}
           className={`cursor-pointer ${style}`}

@@ -1,89 +1,129 @@
 import { set } from "mongoose";
-import React, { useState } from "react";
-import {
-  AiFillStar,
-  AiOutlineEye,
-  AiOutlineShoppingCart,
-  AiOutlineStar,
-} from "react-icons/ai";
+import React, { useEffect, useState } from "react";
+import { AiOutlineEye, AiOutlineShoppingCart } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import Favourite from "../../usablePieces/Favourite.jsx";
 import ProductDetailsCard from "../productDetailsCard/ProductDetailsCard.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import Ratings from "../../products/Ratings.jsx";
+import {
+  addToWishlist,
+  removeFromWishlist,
+} from "../../../redux/actions/wishlist.js";
 
 export default function ProductCart({ data }) {
   const [open, setOpen] = useState(false);
+  const { cart } = useSelector((state) => state.cart);
+  const { wishlist } = useSelector((state) => state.wishlist);
+  const [click, setClick] = useState(false);
+  const dispatch = useDispatch();
 
-  const product_name = data.name.replace(/\s+/g, "-");
+  useEffect(() => {
+    if (wishlist && wishlist.find((i) => i._id === data._id)) {
+      setClick(true);
+    } else {
+      setClick(false);
+    }
+  }, [wishlist]);
+
+  const handleRemoveFromWishlist = (data) => {
+    setClick(!click);
+    dispatch(removeFromWishlist(data));
+  };
+
+  const handleAddToWishlist = (data) => {
+    setClick(!click);
+    dispatch(addToWishlist(data));
+  };
+
+  const handleAddToCart = (id) => {
+    const isItemExists = cart && cart.find((i) => i._id === id);
+    if (isItemExists) {
+      toast.error("Item already in cart!");
+    } else {
+      if (data.stock < 1) {
+        toast.error("Product stock limited!");
+      } else {
+        const cartData = { ...data, qty: 1 };
+        dispatch(addTocart(cartData));
+        toast.success("Item added to cart successfully!");
+      }
+    }
+  };
+
   return (
     <>
       <div className="w-full h-[370px] bg-white rounded-lg overflow-hidden shadow-sm p-3 relative cursor-pointer">
-        <Link to={`/product/${product_name}`}>
+        <Link
+          to={`${
+            isEvent === true
+              ? `/product/${data._id}?isEvent=true`
+              : `/product/${data._id}`
+          }`}
+        >
           <img
             className="w-full h-[170px] object-contain"
-            src={data.image_Url[0].url}
+            src={`${backend_url}${data.images && data.images[0]}`}
             alt=""
           />
         </Link>
-        <Link to="/">
-          <h5 className="shop_name">{data.shop.name}</h5>
+        <Link to={`/shop/preview/${data?.shop._id}`}>
+          <h5 className="shop_name">
+            {" "}
+            {`${styles.shop_name}`}>{data.shop.name}
+          </h5>
         </Link>
-        <Link to={`/product/${product_name}`}>
+        <Link
+          to={`${
+            isEvent === true
+              ? `/product/${data._id}?isEvent=true`
+              : `/product/${data._id}`
+          }`}
+        >
           <h4 className="pb-3 font-medium">
             {data.name.length > 40 ? data.name.slice(0, 40) + "..." : data.name}
           </h4>
+
           <div className="flex">
-            <AiFillStar
-              size={20}
-              color="#f6ba00"
-              className="mr-2 cursor-pointer"
-            />
-            <AiFillStar
-              size={20}
-              color="#f6ba00"
-              className="mr-2 cursor-pointer"
-            />
-            <AiFillStar
-              size={20}
-              color="#f6ba00"
-              className="mr-2 cursor-pointer"
-            />
-            <AiFillStar
-              size={20}
-              color="#f6ba00"
-              className="mr-2 cursor-pointer"
-            />
-            <AiOutlineStar
-              size={20}
-              color="#f6ba00"
-              className="mr-2 cursor-pointer"
-            />
+            <Ratings rating={data?.ratings} />
           </div>
 
           <div className="py-2 normalFlex justify-between">
             <div className="flex">
               <h5 className="productDiscountPrice">
                 R
-                {data.price === 0
-                  ? data.price.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                {data.originalPrice === 0
+                  ? data.originalPrice
+                      .toFixed(2)
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                   : data.discount_price
                       .toFixed(2)
                       .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
               </h5>
               <h4 className="price">
-                {data.price
+                {data.originalPrice
                   ? "R" +
-                    data.price.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                    data.originalPrice
+                      .toFixed(2)
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                   : null}
               </h4>
             </div>
             <span className="font-normal text-lg text-green-500 ">
-              {data.total_sell} sold
+              {data.sold_out} sold
             </span>
           </div>
         </Link>
         {/* side options */}
         <div>
-          <Favourite size={22} style={"absolute right-2 top-5"} />
+          <Favourite
+            size={22}
+            style={"absolute right-2 top-5"}
+            data={data}
+            click={click}
+            onAddToWishlist={handleAddToWishlist}
+            onRemoveFromWishlist={handleRemoveFromWishlist}
+          />
 
           <AiOutlineEye
             onClick={() => setOpen(!open)}
@@ -93,7 +133,7 @@ export default function ProductCart({ data }) {
             title="Quick view"
           />
           <AiOutlineShoppingCart
-            onClick={() => setOpen(!open)}
+            onClick={() => handleAddToCart(data._id)}
             color="#444"
             size={25}
             className="cursor-pointer absolute right-2 top-24"
