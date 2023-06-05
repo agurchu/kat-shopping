@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { categoriesData, productData } from "../../static/data";
+import { categoriesData } from "../../static/data";
 import {
   AiOutlineHeart,
   AiOutlineSearch,
@@ -16,6 +16,7 @@ import { backend_url } from "../../server";
 import Cart from "../cart/Cart";
 import Wishlist from "../wishlist/Wishlist";
 import { RxCross1 } from "react-icons/rx";
+import kj_dev_logo from "../../assets/kj_dev_logo.png";
 
 export default function Header({ activeHeading }) {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -58,7 +59,7 @@ export default function Header({ activeHeading }) {
         <div className="hidden 800px:h-[50px] 800px:my-[20px] 800px:flex items-center justify-between">
           <div>
             <Link to="/">
-              <img className="h-12" src="kj_dev_logo.png" alt="logo" />
+              <img className="h-12" src={kj_dev_logo} alt="logo" />
             </Link>
           </div>
           {/* search box */}
@@ -100,7 +101,7 @@ export default function Header({ activeHeading }) {
           <div className="button">
             <Link to={`${isSeller ? "/dashboard" : "/shop-create"}`}>
               <h1 className="text-white flex items-center">
-                {isSeller ? "Go Dashboard" : "Become Seller"} Become Seller{" "}
+                {isSeller ? "Go Dashboard" : "Become Seller"}{" "}
                 <IoIosArrowForward className="ml-1" />
               </h1>
             </Link>
@@ -205,7 +206,7 @@ export default function Header({ activeHeading }) {
           <div>
             <Link to="/">
               <img
-                src="kj_dev_logo.png"
+                src={kj_dev_logo}
                 alt=""
                 className="mt-3 h-10 cursor-pointer"
               />
