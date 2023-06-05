@@ -1,17 +1,19 @@
-import { set } from "mongoose";
 import React, { useEffect, useState } from "react";
 import { AiOutlineEye, AiOutlineShoppingCart } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import Favourite from "../../usablePieces/Favourite.jsx";
-import ProductDetailsCard from "../productDetailsCard/ProductDetailsCard.jsx";
+import Favourite from "../../usablePieces/Favourite";
+import ProductDetailsCard from "../productDetailsCard/ProductDetailsCard";
 import { useDispatch, useSelector } from "react-redux";
-import Ratings from "../../products/Ratings.jsx";
+import Ratings from "../../products/Ratings";
 import {
   addToWishlist,
   removeFromWishlist,
-} from "../../../redux/actions/wishlist.js";
+} from "../../../redux/actions/wishlist";
+import { backend_url } from "../../../server";
+import { toast } from "react-toastify";
+import { addTocart } from "../../../redux/actions/cart";
 
-export default function ProductCart({ data }) {
+export default function ProductCart({ data, isEvent }) {
   const [open, setOpen] = useState(false);
   const { cart } = useSelector((state) => state.cart);
   const { wishlist } = useSelector((state) => state.wishlist);
@@ -68,10 +70,7 @@ export default function ProductCart({ data }) {
           />
         </Link>
         <Link to={`/shop/preview/${data?.shop._id}`}>
-          <h5 className="shop_name">
-            {" "}
-            {`${styles.shop_name}`}>{data.shop.name}
-          </h5>
+          <h5 className="shop_name">{data.shop.name}</h5>
         </Link>
         <Link
           to={`${
