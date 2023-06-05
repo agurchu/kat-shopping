@@ -28,14 +28,17 @@ export default function Header({ activeHeading }) {
   const [openCart, setOpenCart] = useState(false);
   const [openWishList, setOpenWishList] = useState(false);
   const [open, setOpen] = useState(false);
+  const { allProducts } = useSelector((state) => state.products);
 
   const handleSearchChange = (e) => {
     const term = e.target.value;
     setSearchTerm(term);
 
-    const filteredProducts = productData.filter((product) =>
-      product.name.toLowerCase().includes(term.toLowerCase())
-    );
+    const filteredProducts =
+      allProducts &&
+      allProducts.filter((product) =>
+        product.name.toLowerCase().includes(term.toLowerCase())
+      );
     setSearchData(filteredProducts);
   };
   useEffect(() => {
