@@ -26,6 +26,7 @@ export default function Header({ activeHeading }) {
   const [active, setActive] = useState(false);
   const [dropDown, setDropDown] = useState(false);
   const [openCart, setOpenCart] = useState(false);
+  const { isSeller } = useSelector((state) => state.seller);
   const [openWishList, setOpenWishList] = useState(false);
   const [open, setOpen] = useState(false);
   const { allProducts } = useSelector((state) => state.products);
@@ -97,9 +98,10 @@ export default function Header({ activeHeading }) {
             ) : null}
           </div>
           <div className="button">
-            <Link to="/shop-create">
+            <Link to={`${isSeller ? "/dashboard" : "/shop-create"}`}>
               <h1 className="text-white flex items-center">
-                Become Seller <IoIosArrowForward className="ml-1" />{" "}
+                {isSeller ? "Go Dashboard" : "Become Seller"} Become Seller{" "}
+                <IoIosArrowForward className="ml-1" />
               </h1>
             </Link>
           </div>
@@ -145,7 +147,7 @@ export default function Header({ activeHeading }) {
               >
                 <AiOutlineHeart size={30} color="rgb(255 255 255/83%)" />
                 <span className="absolute right-0 top-0 bg-orange-600 rounded-full w-4 h-4 p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
-                  0
+                  {wishlist && wishlist.length}
                 </span>
               </div>
               <div
@@ -154,15 +156,16 @@ export default function Header({ activeHeading }) {
               >
                 <AiOutlineShoppingCart size={30} color="rgb(255 255 255/83%)" />
                 <span className="absolute right-0 top-0 bg-orange-600 rounded-full w-4 h-4 p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
-                  1
+                  {cart && cart.length}
                 </span>
               </div>
+
               <div className="relative cursor-pointer mr-4">
                 {isAuthenticated ? (
                   <Link to="/profile">
                     <img
                       className="w-[33px] h-[33px] rounded-full"
-                      src={`${backend_url}${user.avatar}`}
+                      src={`${backend_url}${user?.avatar}`}
                       alt="profile"
                     />
                   </Link>
