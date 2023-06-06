@@ -1,10 +1,10 @@
 import React from "react";
-
+import { productData } from "../../../static/data";
 import ProductCard from "../productCard/ProductCard";
 import { useSelector } from "react-redux";
 
 export default function FeaturedProduct() {
-  const { allProducts } = useSelector((state) => state.products);
+  // const { allProducts } = useSelector((state) => state.products);
   return (
     <div>
       <div className="section">
@@ -12,10 +12,10 @@ export default function FeaturedProduct() {
           <h1>Featured Products</h1>
         </div>
         <div className="mainGrid">
-          {allProducts && allProducts.length !== 0 && (
+          {productData && productData.length !== 0 && (
             <>
-              {allProducts &&
-                allProducts.map((item, index) => (
+              {productData &&
+                productData.map((item, index) => (
                   <ProductCard data={item} key={index} />
                 ))}
             </>

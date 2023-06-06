@@ -14,71 +14,59 @@ import { toast } from "react-toastify";
 import { addTocart } from "../../../redux/actions/cart";
 
 export default function ProductCart({ data, isEvent }) {
+  // const { cart } = useSelector((state) => state.cart);
+  // const { wishlist } = useSelector((state) => state.wishlist);
+  // const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  const { cart } = useSelector((state) => state.cart);
-  const { wishlist } = useSelector((state) => state.wishlist);
   const [click, setClick] = useState(false);
-  const dispatch = useDispatch();
+  const product_name = data.name.replace(/\s+/g, "-");
+  // useEffect(() => {
+  //   if (wishlist && wishlist.find((i) => i._id === data._id)) {
+  //     setClick(true);
+  //   } else {
+  //     setClick(false);
+  //   }
+  // }, [wishlist]);
 
-  useEffect(() => {
-    if (wishlist && wishlist.find((i) => i._id === data._id)) {
-      setClick(true);
-    } else {
-      setClick(false);
-    }
-  }, [wishlist]);
+  // const handleRemoveFromWishlist = (data) => {
+  //   setClick(!click);
+  //   dispatch(removeFromWishlist(data));
+  // };
 
-  const handleRemoveFromWishlist = (data) => {
-    setClick(!click);
-    dispatch(removeFromWishlist(data));
-  };
+  // const handleAddToWishlist = (data) => {
+  //   setClick(!click);
+  //   dispatch(addToWishlist(data));
+  // };
 
-  const handleAddToWishlist = (data) => {
-    setClick(!click);
-    dispatch(addToWishlist(data));
-  };
-
-  const handleAddToCart = (id) => {
-    const isItemExists = cart && cart.find((i) => i._id === id);
-    if (isItemExists) {
-      toast.error("Item already in cart!");
-    } else {
-      if (data.stock < 1) {
-        toast.error("Product stock limited!");
-      } else {
-        const cartData = { ...data, qty: 1 };
-        dispatch(addTocart(cartData));
-        toast.success("Item added to cart successfully!");
-      }
-    }
-  };
+  // const handleAddToCart = (id) => {
+  //   const isItemExists = cart && cart.find((i) => i._id === id);
+  //   if (isItemExists) {
+  //     toast.error("Item already in cart!");
+  //   } else {
+  //     if (data.stock < 1) {
+  //       toast.error("Product stock limited!");
+  //     } else {
+  //       const cartData = { ...data, qty: 1 };
+  //       dispatch(addTocart(cartData));
+  //       toast.success("Item added to cart successfully!");
+  //     }
+  //   }
+  // };
 
   return (
     <>
       <div className="w-full h-[370px] bg-white rounded-lg overflow-hidden shadow-sm p-3 relative cursor-pointer">
-        <Link
-          to={`${
-            isEvent === true
-              ? `/product/${data._id}?isEvent=true`
-              : `/product/${data._id}`
-          }`}
-        >
+        <Link to={`/product/${product_name}`}>
           <img
             className="w-full h-[170px] object-contain"
-            src={`${backend_url}${data.images && data.images[0]}`}
+            src={`${data.image_Url && data.image_Url[0].url}`}
             alt=""
           />
         </Link>
         <Link to={`/shop/preview/${data?.shop._id}`}>
           <h5 className="shop_name">{data.shop.name}</h5>
         </Link>
-        <Link
-          to={`${
-            isEvent === true
-              ? `/product/${data._id}?isEvent=true`
-              : `/product/${data._id}`
-          }`}
-        >
+        <Link to={`/product/${product_name}`}>
           <h4 className="pb-3 font-medium">
             {data.name.length > 40 ? data.name.slice(0, 40) + "..." : data.name}
           </h4>
@@ -109,7 +97,7 @@ export default function ProductCart({ data, isEvent }) {
               </h4>
             </div>
             <span className="font-normal text-lg text-green-500 ">
-              {data.sold_out} sold
+              {data.total_sell} sold
             </span>
           </div>
         </Link>
@@ -118,10 +106,10 @@ export default function ProductCart({ data, isEvent }) {
           <Favourite
             size={22}
             style={"absolute right-2 top-5"}
-            data={data}
+            // data={data}
             click={click}
-            onAddToWishlist={handleAddToWishlist}
-            onRemoveFromWishlist={handleRemoveFromWishlist}
+            // onAddToWishlist={handleAddToWishlist}
+            // onRemoveFromWishlist={handleRemoveFromWishlist}
           />
 
           <AiOutlineEye
@@ -132,7 +120,7 @@ export default function ProductCart({ data, isEvent }) {
             title="Quick view"
           />
           <AiOutlineShoppingCart
-            onClick={() => handleAddToCart(data._id)}
+            onClick={() => handleAddToCart(product_name)}
             color="#444"
             size={25}
             className="cursor-pointer absolute right-2 top-24"

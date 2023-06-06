@@ -4,7 +4,7 @@ const { upload } = require("../multer");
 const Shop = require("../model/shop");
 const Event = require("../model/event");
 const ErrorHandler = require("../utils/ErrorHandler");
-const { isSeller, isAdmin, isAuthenticated } = require("../middleware/auth");
+const { isAdmin, isAuthenticated } = require("../middleware/auth");
 const router = express.Router();
 const fs = require("fs");
 
