@@ -4,7 +4,7 @@ const initialState = {
   isLoading: true,
 };
 
-export const productReducer = createReducer(initialState, {
+const productReducer = createReducer(initialState, {
   productCreateRequest: (state) => {
     state.isLoading = true;
   },
@@ -62,3 +62,4 @@ export const productReducer = createReducer(initialState, {
     state.error = null;
   },
 });
+export default productReducer;
