@@ -26,7 +26,6 @@ import { getAllEvents } from "./redux/actions/event";
 import axios from "axios";
 import ProtectedRoute from "./routes/ProtectedRoute";
 
-axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.withCredentials = true;
 
 function App() {

@@ -5,6 +5,7 @@ import { RxAvatar } from "react-icons/rx";
 import axios from "axios";
 
 import { toast } from "react-toastify";
+import { server } from "../../server";
 
 export default function Signup() {
   const [fullName, setFullName] = useState("");
@@ -27,7 +28,11 @@ export default function Signup() {
     newForm.append("email", email);
     newForm.append("password", password);
     try {
-      const response = await axios.post("/user/create-user", newForm, config);
+      const response = await axios.post(
+        `${server}/user/create-user`,
+        newForm,
+        config
+      );
       toast.success(response.data.message);
       setFullName("");
       setEmail("");
