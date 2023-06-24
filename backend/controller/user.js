@@ -31,26 +31,26 @@ router.post("/create-user", upload.single("file"), async (req, res, next) => {
     const filename = req.file.filename;
     const fileUrl = path.join(filename);
 
+    const signedUpUser = await User.create({
+      fullName,
+      email,
+      password,
+      avatar: fileUrl,
+      // : securePassword,
+    });
+    signedUpUser
+      .save()
+      .then((data) => res.json(data))
+      .catch((err) => res.json(err));
+
+    res.json(signedUpUser);
+
     const user = {
       fullName: fullName,
       email: email,
       password: password,
       avatar: fileUrl,
     };
-
-    const signedUpUser = await User.create({
-      fullName,
-      email,
-      password,
-      avatar,
-      // : securePassword,
-    });
-    signedUpUser
-      .save()
-      .then((data) => response.json(data))
-      .catch((err) => response.json(err));
-
-    response.json(signedUpUser);
 
     const activationToken = createActivationToken(user);
 

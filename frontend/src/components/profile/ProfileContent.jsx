@@ -106,7 +106,7 @@ export default function ProfileContent({ active }) {
                   <label className="block pb-2">Full Name</label>
                   <input
                     type="text"
-                    className="input !w-[95%] mb-4 800px:mb-0"
+                    className="input !w-[95%] mb-4 800px:mb-0 px-3  rounded-md border-[1px] border-gray-400 "
                     required
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
@@ -116,7 +116,7 @@ export default function ProfileContent({ active }) {
                   <label className="block pb-2">Email Address</label>
                   <input
                     type="text"
-                    className="input !w-[95%] mb-1 800px:mb-0"
+                    className="input !w-[95%] mb-1 800px:mb-0 px-3  rounded-md border-[1px] border-gray-400 "
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -129,7 +129,7 @@ export default function ProfileContent({ active }) {
                   <label className="block pb-2">Phone Number</label>
                   <input
                     type="number"
-                    className="input !w-[95%] mb-4 800px:mb-0"
+                    className="input !w-[95%] mb-4 800px:mb-0 px-3  rounded-md border-[1px] border-gray-400 "
                     required
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
@@ -140,7 +140,7 @@ export default function ProfileContent({ active }) {
                   <label className="block pb-2">Enter your password</label>
                   <input
                     type="password"
-                    className="input !w-[95%] mb-4 800px:mb-0"
+                    className="input !w-[95%] mb-4 800px:mb-0 px-3  rounded-md border-[1px] border-gray-400 "
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -148,7 +148,7 @@ export default function ProfileContent({ active }) {
                 </div>
               </div>
               <input
-                className={`w-[250px] h-[40px] border border-orange-600 text-center text-orange-600 rounded-[3px] mt-8 cursor-pointer`}
+                className={`w-[250px] h-[40px] border border-orange-600 text-center text-orange-600 rounded-md mt-8 cursor-pointer`}
                 required
                 value="Update"
                 type="submit"

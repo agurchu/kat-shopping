@@ -31,7 +31,7 @@ export default function Header({ activeHeading }) {
   const [openWishList, setOpenWishList] = useState(false);
   const [open, setOpen] = useState(false);
   const { allProducts } = useSelector((state) => state.products);
-
+  console.log(user);
   const handleSearchChange = (e) => {
     const term = e.target.value;
     setSearchTerm(term);
