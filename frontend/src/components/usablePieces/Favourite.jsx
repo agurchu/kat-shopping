@@ -1,14 +1,26 @@
 import React, { useState } from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import {
+  addToWishlist,
+  removeFromWishlist,
+} from "../../../redux/actions/wishlist";
 
-export default function Favourite({ size, style }) {
-  const [click, setClick] = useState(false);
+export default function Favourite({ size, style, data, click }) {
+  const handleRemoveFromWishlist = (data) => {
+    setClick(!click);
+    dispatch(removeFromWishlist(data));
+  };
+
+  const handleAddToWishlist = (data) => {
+    setClick(!click);
+    dispatch(addToWishlist(data));
+  };
   return (
     <>
       {" "}
       {click ? (
         <AiFillHeart
-          onClick={() => setClick(false)}
+          onClick={() => handleRemoveFromWishlist(data)}
           color={click ? "red" : "#333"}
           size={size}
           className={`cursor-pointer ${style}`}
@@ -16,7 +28,7 @@ export default function Favourite({ size, style }) {
         />
       ) : (
         <AiOutlineHeart
-          onClick={() => setClick(true)}
+          onClick={() => handleAddToWishlist(data)}
           color={click ? "red" : "#333"}
           size={size}
           className={`cursor-pointer ${style}`}

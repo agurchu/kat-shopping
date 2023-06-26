@@ -5,53 +5,40 @@ import Favourite from "../../usablePieces/Favourite";
 import ProductDetailsCard from "../productDetailsCard/ProductDetailsCard";
 import { useDispatch, useSelector } from "react-redux";
 import Ratings from "../../products/Ratings";
-import {
-  addToWishlist,
-  removeFromWishlist,
-} from "../../../redux/actions/wishlist";
+
 import { backend_url } from "../../../server";
 import { toast } from "react-toastify";
 import { addTocart } from "../../../redux/actions/cart";
 
 export default function ProductCart({ data, isEvent }) {
-  // const { cart } = useSelector((state) => state.cart);
-  // const { wishlist } = useSelector((state) => state.wishlist);
-  // const dispatch = useDispatch();
+  const { cart } = useSelector((state) => state.cart);
+  const { wishlist } = useSelector((state) => state.wishlist);
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [click, setClick] = useState(false);
   const product_name = data.name.replace(/\s+/g, "-");
-  // useEffect(() => {
-  //   if (wishlist && wishlist.find((i) => i._id === data._id)) {
-  //     setClick(true);
-  //   } else {
-  //     setClick(false);
-  //   }
-  // }, [wishlist]);
+  useEffect(() => {
+    if (wishlist && wishlist.find((i) => i._id === data._id)) {
+      setClick(true);
+    } else {
+      setClick(false);
+    }
+  }, [wishlist]);
 
-  // const handleRemoveFromWishlist = (data) => {
-  //   setClick(!click);
-  //   dispatch(removeFromWishlist(data));
-  // };
-
-  // const handleAddToWishlist = (data) => {
-  //   setClick(!click);
-  //   dispatch(addToWishlist(data));
-  // };
-
-  // const handleAddToCart = (id) => {
-  //   const isItemExists = cart && cart.find((i) => i._id === id);
-  //   if (isItemExists) {
-  //     toast.error("Item already in cart!");
-  //   } else {
-  //     if (data.stock < 1) {
-  //       toast.error("Product stock limited!");
-  //     } else {
-  //       const cartData = { ...data, qty: 1 };
-  //       dispatch(addTocart(cartData));
-  //       toast.success("Item added to cart successfully!");
-  //     }
-  //   }
-  // };
+  const handleAddToCart = (id) => {
+    const isItemExists = cart && cart.find((i) => i._id === id);
+    if (isItemExists) {
+      toast.error("Item already in cart!");
+    } else {
+      if (data.stock < 1) {
+        toast.error("Product stock limited!");
+      } else {
+        const cartData = { ...data, qty: 1 };
+        dispatch(addTocart(cartData));
+        toast.success("Item added to cart successfully!");
+      }
+    }
+  };
 
   return (
     <>
@@ -106,10 +93,8 @@ export default function ProductCart({ data, isEvent }) {
           <Favourite
             size={22}
             style={"absolute right-2 top-5"}
-            // data={data}
+            data={data}
             click={click}
-            // onAddToWishlist={handleAddToWishlist}
-            // onRemoveFromWishlist={handleRemoveFromWishlist}
           />
 
           <AiOutlineEye
@@ -126,9 +111,7 @@ export default function ProductCart({ data, isEvent }) {
             className="cursor-pointer absolute right-2 top-24"
             title="Add to cart"
           />
-          {open && (
-            <ProductDetailsCard open={open} setOpen={setOpen} data={data} />
-          )}
+          {open && <ProductDetailsCard setOpen={setOpen} data={data} />}
         </div>
       </div>
     </>

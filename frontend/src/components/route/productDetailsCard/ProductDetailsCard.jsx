@@ -2,13 +2,58 @@ import React, { useState } from "react";
 import { RxCross1 } from "react-icons/rx";
 import { AiOutlineMessage, AiOutlineShoppingCart } from "react-icons/ai";
 import Favourite from "../../usablePieces/Favourite";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { addTocart } from "../../../redux/actions/cart";
+import {
+  addToWishlist,
+  removeFromWishlist,
+} from "../../../redux/actions/wishlist";
+import { Link } from "react-router-dom";
+import { backend_url } from "../../../server";
 import IncrementBtn from "../../usablePieces/incrementBtn";
 
-export default function ProductDetailsCard({ setOpen, data, open }) {
+export default function ProductDetailsCard({ setOpen, data }) {
   const [click, setClick] = useState(false);
-  const [select, setSelect] = useState(false);
+  const { cart } = useSelector((state) => state.cart);
+  const { wishlist } = useSelector((state) => state.wishlist);
+  const dispatch = useDispatch();
+  const [count, setCount] = useState(1);
 
   const handleMessageSubmit = () => {};
+
+  const addToCartHandler = (id) => {
+    const isItemExists = cart && cart.find((i) => i._id === id);
+    if (isItemExists) {
+      toast.error("Item already in cart!");
+    } else {
+      if (data.stock < count) {
+        toast.error("Product stock limited!");
+      } else {
+        const cartData = { ...data, qty: count };
+        dispatch(addTocart(cartData));
+        toast.success("Item added to cart successfully!");
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (wishlist && wishlist.find((i) => i._id === data._id)) {
+      setClick(true);
+    } else {
+      setClick(false);
+    }
+  }, [wishlist]);
+
+  const removeFromWishlistHandler = (data) => {
+    setClick(!click);
+    dispatch(removeFromWishlist(data));
+  };
+
+  const addToWishlistHandler = (data) => {
+    setClick(!click);
+    dispatch(addToWishlist(data));
+  };
 
   return (
     <div className="bg-white">
@@ -54,7 +99,15 @@ export default function ProductDetailsCard({ setOpen, data, open }) {
                     {data.price ? "R" + data.price : null}
                   </h3>
                 </div>
-                <IncrementBtn />
+                <IncrementBtn count={count} />
+                <div>
+                  <Favourite
+                    size={22}
+                    style={"absolute right-2 top-5"}
+                    data={data}
+                    click={click}
+                  />
+                </div>
                 <div className="button2">
                   <span className="normalFlex text-white">
                     Add to cart <AiOutlineShoppingCart className="ml-1" />

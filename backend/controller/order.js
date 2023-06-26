@@ -90,146 +90,146 @@ router.get(
 );
 
 // update order status for seller
-router.put(
-  "/update-order-status/:id",
-  isSeller,
-  catchAsyncErrors(async (req, res, next) => {
-    try {
-      const order = await Order.findById(req.params.id);
+// router.put(
+//   "/update-order-status/:id",
+//   isSeller,
+//   catchAsyncErrors(async (req, res, next) => {
+//     try {
+//       const order = await Order.findById(req.params.id);
 
-      if (!order) {
-        return next(new ErrorHandler("Order not found with this id", 400));
-      }
-      if (req.body.status === "Transferred to delivery partner") {
-        order.cart.forEach(async (o) => {
-          await updateOrder(o._id, o.qty);
-        });
-      }
+//       if (!order) {
+//         return next(new ErrorHandler("Order not found with this id", 400));
+//       }
+//       if (req.body.status === "Transferred to delivery partner") {
+//         order.cart.forEach(async (o) => {
+//           await updateOrder(o._id, o.qty);
+//         });
+//       }
 
-      order.status = req.body.status;
+//       order.status = req.body.status;
 
-      if (req.body.status === "Delivered") {
-        order.deliveredAt = Date.now();
-        order.paymentInfo.status = "Succeeded";
-        const serviceCharge = order.totalPrice * 0.1;
-        await updateSellerInfo(order.totalPrice - serviceCharge);
-      }
+//       if (req.body.status === "Delivered") {
+//         order.deliveredAt = Date.now();
+//         order.paymentInfo.status = "Succeeded";
+//         const serviceCharge = order.totalPrice * 0.1;
+//         await updateSellerInfo(order.totalPrice - serviceCharge);
+//       }
 
-      await order.save({ validateBeforeSave: false });
+//       await order.save({ validateBeforeSave: false });
 
-      res.status(200).json({
-        success: true,
-        order,
-      });
+//       res.status(200).json({
+//         success: true,
+//         order,
+//       });
 
-      async function updateOrder(id, qty) {
-        const product = await Product.findById(id);
+//       async function updateOrder(id, qty) {
+//         const product = await Product.findById(id);
 
-        product.stock -= qty;
-        product.sold_out += qty;
+//         product.stock -= qty;
+//         product.sold_out += qty;
 
-        await product.save({ validateBeforeSave: false });
-      }
+//         await product.save({ validateBeforeSave: false });
+//       }
 
-      async function updateSellerInfo(amount) {
-        const seller = await Shop.findById(req.seller.id);
+//       async function updateSellerInfo(amount) {
+//         const seller = await Shop.findById(req.seller.id);
 
-        seller.availableBalance = amount;
+//         seller.availableBalance = amount;
 
-        await seller.save();
-      }
-    } catch (error) {
-      return next(new ErrorHandler(error.message, 500));
-    }
-  })
-);
+//         await seller.save();
+//       }
+//     } catch (error) {
+//       return next(new ErrorHandler(error.message, 500));
+//     }
+//   })
+// );
 
-// give a refund ----- user
-router.put(
-  "/order-refund/:id",
-  catchAsyncErrors(async (req, res, next) => {
-    try {
-      const order = await Order.findById(req.params.id);
+// // give a refund ----- user
+// router.put(
+//   "/order-refund/:id",
+//   catchAsyncErrors(async (req, res, next) => {
+//     try {
+//       const order = await Order.findById(req.params.id);
 
-      if (!order) {
-        return next(new ErrorHandler("Order not found with this id", 400));
-      }
+//       if (!order) {
+//         return next(new ErrorHandler("Order not found with this id", 400));
+//       }
 
-      order.status = req.body.status;
+//       order.status = req.body.status;
 
-      await order.save({ validateBeforeSave: false });
+//       await order.save({ validateBeforeSave: false });
 
-      res.status(200).json({
-        success: true,
-        order,
-        message: "Order Refund Request successfully!",
-      });
-    } catch (error) {
-      return next(new ErrorHandler(error.message, 500));
-    }
-  })
-);
+//       res.status(200).json({
+//         success: true,
+//         order,
+//         message: "Order Refund Request successfully!",
+//       });
+//     } catch (error) {
+//       return next(new ErrorHandler(error.message, 500));
+//     }
+//   })
+// );
 
-// accept the refund ---- seller
-router.put(
-  "/order-refund-success/:id",
-  isSeller,
-  catchAsyncErrors(async (req, res, next) => {
-    try {
-      const order = await Order.findById(req.params.id);
+// // accept the refund ---- seller
+// router.put(
+//   "/order-refund-success/:id",
+//   isSeller,
+//   catchAsyncErrors(async (req, res, next) => {
+//     try {
+//       const order = await Order.findById(req.params.id);
 
-      if (!order) {
-        return next(new ErrorHandler("Order not found with this id", 400));
-      }
+//       if (!order) {
+//         return next(new ErrorHandler("Order not found with this id", 400));
+//       }
 
-      order.status = req.body.status;
+//       order.status = req.body.status;
 
-      await order.save();
+//       await order.save();
 
-      res.status(200).json({
-        success: true,
-        message: "Order Refund successfull!",
-      });
+//       res.status(200).json({
+//         success: true,
+//         message: "Order Refund successfull!",
+//       });
 
-      if (req.body.status === "Refund Success") {
-        order.cart.forEach(async (o) => {
-          await updateOrder(o._id, o.qty);
-        });
-      }
+//       if (req.body.status === "Refund Success") {
+//         order.cart.forEach(async (o) => {
+//           await updateOrder(o._id, o.qty);
+//         });
+//       }
 
-      async function updateOrder(id, qty) {
-        const product = await Product.findById(id);
+//       async function updateOrder(id, qty) {
+//         const product = await Product.findById(id);
 
-        product.stock += qty;
-        product.sold_out -= qty;
+//         product.stock += qty;
+//         product.sold_out -= qty;
 
-        await product.save({ validateBeforeSave: false });
-      }
-    } catch (error) {
-      return next(new ErrorHandler(error.message, 500));
-    }
-  })
-);
+//         await product.save({ validateBeforeSave: false });
+//       }
+//     } catch (error) {
+//       return next(new ErrorHandler(error.message, 500));
+//     }
+//   })
+// );
 
-// all orders --- for admin
-router.get(
-  "/admin-all-orders",
-  isAuthenticated,
-  isAdmin("Admin"),
-  catchAsyncErrors(async (req, res, next) => {
-    try {
-      const orders = await Order.find().sort({
-        deliveredAt: -1,
-        createdAt: -1,
-      });
-      res.status(201).json({
-        success: true,
-        orders,
-      });
-    } catch (error) {
-      return next(new ErrorHandler(error.message, 500));
-    }
-  })
-);
+// // all orders --- for admin
+// router.get(
+//   "/admin-all-orders",
+//   isAuthenticated,
+//   isAdmin("Admin"),
+//   catchAsyncErrors(async (req, res, next) => {
+//     try {
+//       const orders = await Order.find().sort({
+//         deliveredAt: -1,
+//         createdAt: -1,
+//       });
+//       res.status(201).json({
+//         success: true,
+//         orders,
+//       });
+//     } catch (error) {
+//       return next(new ErrorHandler(error.message, 500));
+//     }
+//   })
+// );
 
 module.exports = router;

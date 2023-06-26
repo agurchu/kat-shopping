@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import Favourite from "./Favourite";
 
-export default function IncrementBtn() {
-  const [count, setCount] = useState(1);
-
+export default function IncrementBtn({ count }) {
   const decrementCount = () => {
     if (count > 1) setCount(count - 1);
   };
