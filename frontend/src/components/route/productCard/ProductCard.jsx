@@ -95,6 +95,7 @@ export default function ProductCart({ data, isEvent }) {
             style={"absolute right-2 top-5"}
             data={data}
             click={click}
+            setClick={setClick}
           />
 
           <AiOutlineEye

@@ -3,9 +3,11 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import {
   addToWishlist,
   removeFromWishlist,
-} from "../../../redux/actions/wishlist";
+} from "../../redux/actions/wishlist";
+import { useDispatch } from "react-redux";
 
-export default function Favourite({ size, style, data, click }) {
+export default function Favourite({ size, style, data, click, setClick }) {
+  const dispatch = useDispatch();
   const handleRemoveFromWishlist = (data) => {
     setClick(!click);
     dispatch(removeFromWishlist(data));

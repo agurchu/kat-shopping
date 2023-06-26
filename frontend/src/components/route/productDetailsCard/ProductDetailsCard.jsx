@@ -5,10 +5,7 @@ import Favourite from "../../usablePieces/Favourite";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { addTocart } from "../../../redux/actions/cart";
-import {
-  addToWishlist,
-  removeFromWishlist,
-} from "../../../redux/actions/wishlist";
+
 import { Link } from "react-router-dom";
 import { backend_url } from "../../../server";
 import IncrementBtn from "../../usablePieces/incrementBtn";
@@ -36,7 +33,12 @@ export default function ProductDetailsCard({ setOpen, data }) {
       }
     }
   };
-
+  const decrementCount = () => {
+    if (count > 1) setCount(count - 1);
+  };
+  const incrementCount = () => {
+    setCount(count + 1);
+  };
   useEffect(() => {
     if (wishlist && wishlist.find((i) => i._id === data._id)) {
       setClick(true);
@@ -44,16 +46,6 @@ export default function ProductDetailsCard({ setOpen, data }) {
       setClick(false);
     }
   }, [wishlist]);
-
-  const removeFromWishlistHandler = (data) => {
-    setClick(!click);
-    dispatch(removeFromWishlist(data));
-  };
-
-  const addToWishlistHandler = (data) => {
-    setClick(!click);
-    dispatch(addToWishlist(data));
-  };
 
   return (
     <div className="bg-white">
@@ -99,15 +91,15 @@ export default function ProductDetailsCard({ setOpen, data }) {
                     {data.price ? "R" + data.price : null}
                   </h3>
                 </div>
-                <IncrementBtn count={count} />
-                <div>
-                  <Favourite
-                    size={22}
-                    style={"absolute right-2 top-5"}
-                    data={data}
-                    click={click}
-                  />
-                </div>
+                <IncrementBtn
+                  data={data}
+                  click={click}
+                  incrementCount={incrementCount}
+                  decrementCount={decrementCount}
+                  count={count}
+                  setClick={setClick}
+                />
+
                 <div className="button2">
                   <span className="normalFlex text-white">
                     Add to cart <AiOutlineShoppingCart className="ml-1" />

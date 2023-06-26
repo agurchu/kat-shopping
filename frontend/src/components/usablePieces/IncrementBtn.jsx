@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import Favourite from "./Favourite";
 
-export default function IncrementBtn({ count }) {
-  const decrementCount = () => {
-    if (count > 1) setCount(count - 1);
-  };
-  const incrementCount = () => {
-    setCount(count + 1);
-  };
+export default function IncrementBtn({
+  count,
+  data,
+  click,
+  decrementCount,
+  incrementCount,
+  setClick,
+}) {
   return (
     <div className="normalFlex mt-12 justify-between pr-3">
       <div>
@@ -28,7 +29,13 @@ export default function IncrementBtn({ count }) {
         </button>
       </div>
       <div>
-        <Favourite size={30} />
+        <Favourite
+          size={30}
+          style={"absolute right-2 top-5"}
+          data={data}
+          click={click}
+          setClick={setClick}
+        />
       </div>
     </div>
   );
