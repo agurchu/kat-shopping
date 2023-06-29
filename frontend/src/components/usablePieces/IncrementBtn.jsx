@@ -4,11 +4,10 @@ import Favourite from "./Favourite";
 export default function IncrementBtn({
   count,
   data,
-  click,
   decrementCount,
   incrementCount,
-  setClick,
 }) {
+  console.log(count);
   return (
     <div className="normalFlex mt-12 justify-between pr-3">
       <div>
@@ -29,13 +28,7 @@ export default function IncrementBtn({
         </button>
       </div>
       <div>
-        <Favourite
-          size={30}
-          style={"absolute right-2 top-5"}
-          data={data}
-          click={click}
-          setClick={setClick}
-        />
+        <Favourite size={30} style={"right-2 top-5"} data={data} />
       </div>
     </div>
   );

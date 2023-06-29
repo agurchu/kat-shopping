@@ -88,7 +88,7 @@ function CartSingle({ data, removeFromWishlistHandler, addToCartHandler }) {
           className="cursor-pointer 800px:mb-['unset'] 800px:ml-['unset'] mb-2 ml-2"
         />
         <img
-          src={`${backend_url}${data?.images[0]}`}
+          src={`${data?.image_Url[0].url}`}
           alt="cloth"
           className="w-[130px] h-min mx-2 rounded-md"
         />

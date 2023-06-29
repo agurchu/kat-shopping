@@ -17,16 +17,17 @@ export default function ProductCart({ data, isEvent }) {
   const [open, setOpen] = useState(false);
   const [click, setClick] = useState(false);
   const product_name = data.name.replace(/\s+/g, "-");
+
   useEffect(() => {
-    if (wishlist && wishlist.find((i) => i._id === data._id)) {
+    if (wishlist && wishlist.find((i) => i.id === data.id)) {
       setClick(true);
     } else {
       setClick(false);
     }
-  }, [wishlist]);
+  }, []);
 
   const handleAddToCart = (id) => {
-    const isItemExists = cart && cart.find((i) => i._id === id);
+    const isItemExists = cart && cart.find((i) => i.id === id);
     if (isItemExists) {
       toast.error("Item already in cart!");
     } else {
@@ -66,20 +67,16 @@ export default function ProductCart({ data, isEvent }) {
             <div className="flex">
               <h5 className="productDiscountPrice">
                 R
-                {data.originalPrice === 0
-                  ? data.originalPrice
-                      .toFixed(2)
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                {data.price === 0
+                  ? data.price.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                   : data.discount_price
                       .toFixed(2)
                       .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
               </h5>
               <h4 className="price">
-                {data.originalPrice
+                {data.price
                   ? "R" +
-                    data.originalPrice
-                      .toFixed(2)
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                    data.price.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                   : null}
               </h4>
             </div>
@@ -106,7 +103,7 @@ export default function ProductCart({ data, isEvent }) {
             title="Quick view"
           />
           <AiOutlineShoppingCart
-            onClick={() => handleAddToCart(product_name)}
+            onClick={() => handleAddToCart(data.id)}
             color="#444"
             size={25}
             className="cursor-pointer absolute right-2 top-24"

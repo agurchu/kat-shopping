@@ -8,19 +8,18 @@ import { addTocart } from "../../../redux/actions/cart";
 
 import { Link } from "react-router-dom";
 import { backend_url } from "../../../server";
-import IncrementBtn from "../../usablePieces/incrementBtn";
+import IncrementBtn from "../../usablePieces/IncrementBtn";
 
 export default function ProductDetailsCard({ setOpen, data }) {
-  const [click, setClick] = useState(false);
   const { cart } = useSelector((state) => state.cart);
   const { wishlist } = useSelector((state) => state.wishlist);
   const dispatch = useDispatch();
   const [count, setCount] = useState(1);
-
   const handleMessageSubmit = () => {};
+  console.log(data);
 
   const addToCartHandler = (id) => {
-    const isItemExists = cart && cart.find((i) => i._id === id);
+    const isItemExists = cart && cart.find((i) => i.id === id);
     if (isItemExists) {
       toast.error("Item already in cart!");
     } else {
@@ -39,13 +38,6 @@ export default function ProductDetailsCard({ setOpen, data }) {
   const incrementCount = () => {
     setCount(count + 1);
   };
-  useEffect(() => {
-    if (wishlist && wishlist.find((i) => i._id === data._id)) {
-      setClick(true);
-    } else {
-      setClick(false);
-    }
-  }, [wishlist]);
 
   return (
     <div className="bg-white">
@@ -93,14 +85,16 @@ export default function ProductDetailsCard({ setOpen, data }) {
                 </div>
                 <IncrementBtn
                   data={data}
-                  click={click}
                   incrementCount={incrementCount}
                   decrementCount={decrementCount}
                   count={count}
-                  setClick={setClick}
+                  wishlist={wishlist}
                 />
 
-                <div className="button2">
+                <div
+                  className="button2"
+                  onClick={() => addToCartHandler(data.id)}
+                >
                   <span className="normalFlex text-white">
                     Add to cart <AiOutlineShoppingCart className="ml-1" />
                   </span>
