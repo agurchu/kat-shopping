@@ -17,7 +17,7 @@ export default function Cart({ setOpenCart }) {
   };
 
   const totalPrice = cart.reduce(
-    (acc, item) => acc + item.qty * item.discountPrice,
+    (acc, item) => acc + item.qty * item.discount_price,
     0
   );
 
@@ -90,7 +90,7 @@ export default function Cart({ setOpenCart }) {
 function CartSingle({ data, quantityChangeHandler, removeFromCartHandler }) {
   const [value, setValue] = useState(data.qty);
   const usdToZar = 19.66;
-  const totalPrice = (data.discountPrice * usdToZar * value)
+  const totalPrice = (data.discount_price * usdToZar * value)
     .toFixed(2)
     .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
@@ -129,7 +129,7 @@ function CartSingle({ data, quantityChangeHandler, removeFromCartHandler }) {
           </div>
         </div>
         <img
-          src={`${backend_url}${data?.images[0]}`}
+          src={`${data.image_Url[0].url}`}
           alt="cloth"
           className="w-[130px] h-min ml-2 rounded-md"
         />
@@ -137,10 +137,9 @@ function CartSingle({ data, quantityChangeHandler, removeFromCartHandler }) {
           <h1>{data.name}</h1>
           <h2 className="font-normal text-sm text-[#00000082]">
             R
-            {(data.discountPrice * usdToZar)
+            {(data.discount_price * usdToZar * value)
               .toFixed(2)
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
-            * {value}
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
           </h2>
           <h3 className="font-semibold font-Roboto text-lg pt-1 text-orange-600">
             R{totalPrice}
