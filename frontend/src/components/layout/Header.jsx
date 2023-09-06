@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { categoriesData } from "../../static/data";
+import { categoriesData, productData } from "../../static/data";
 import {
   AiOutlineHeart,
   AiOutlineSearch,
@@ -37,8 +37,8 @@ export default function Header({ activeHeading }) {
     setSearchTerm(term);
 
     const filteredProducts =
-      allProducts &&
-      allProducts.filter((product) =>
+      productData &&
+      productData.filter((product) =>
         product.name.toLowerCase().includes(term.toLowerCase())
       );
     setSearchData(filteredProducts);
@@ -75,8 +75,8 @@ export default function Header({ activeHeading }) {
               size={30}
               className="absolute right-2 top-1.5 cursor-pointer"
             />
-            {searchData && searchData.length !== 0 ? (
-              <div className="absolute min-h-[30hv] bg-slate-50 shadow-sm-2 z-[9] p-4">
+            {searchData && searchData.length > 0 ? (
+              <div className="absolute min-h-[30hv] bg-slate-50 shadow-sm-2 z-[9] p-4 rounded-md">
                 {searchData &&
                   searchData.map((i, index) => {
                     const d = i.name;
