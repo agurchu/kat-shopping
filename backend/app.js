@@ -38,6 +38,9 @@ app.use("/api/v2/shop", shop);
 app.use("/api/v2/event", event);
 app.use("/api/v2/order", order);
 app.use("/api/v2/product", product);
+app.use("/", (req, res) => {
+  res.send("welcome to the server home page");
+});
 
 // for ErrorHandling
 app.use(ErrorHandler);
